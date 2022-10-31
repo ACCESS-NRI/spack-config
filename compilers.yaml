@@ -1,0 +1,131 @@
+compilers:
+- compiler:
+    spec: intel@2021.2.0
+    paths:
+      cc: /apps/intel-oneapi/compiler/2021.2.0/linux/bin/intel64/icc
+      cxx: /apps/intel-oneapi/compiler/2021.2.0/linux/bin/intel64/icpc
+      f77: /apps/intel-oneapi/compiler/2021.2.0/linux/bin/intel64/ifort
+      fc: /apps/intel-oneapi/compiler/2021.2.0/linux/bin/intel64/ifort
+    flags: {}
+    operating_system: centos8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: oneapi@2021.1
+    paths:
+      cc: /apps/intel/compilers_and_libraries_2020.4.304/linux/bin/icx
+      cxx: /apps/intel/compilers_and_libraries_2020.4.304/linux/bin/icpx
+      f77: null
+      fc: null
+    flags: {}
+    operating_system: centos8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: intel@19.1.3.304
+    paths:
+      cc: /apps/intel/compilers_and_libraries_2020.4.304/linux/bin/intel64/icc
+      cxx: /apps/intel/compilers_and_libraries_2020.4.304/linux/bin/intel64/icpc
+      f77: /apps/intel/compilers_and_libraries_2020.4.304/linux/bin/intel64/ifort
+      fc: /apps/intel/compilers_and_libraries_2020.4.304/linux/bin/intel64/ifort
+    flags: {}
+    operating_system: centos8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: intel@19.1.2.254
+    paths:
+      cc: /apps/intel/compilers_and_libraries_2020.2.254/linux/bin/intel64/icc
+      cxx: /apps/intel/compilers_and_libraries_2020.2.254/linux/bin/intel64/icpc
+      f77: /apps/intel/compilers_and_libraries_2020.2.254/linux/bin/intel64/ifort
+      fc: /apps/intel/compilers_and_libraries_2020.2.254/linux/bin/intel64/ifort
+    flags: {}
+    operating_system: centos8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: clang@13.0.1
+    paths:
+      cc: /bin/clang
+      cxx: /bin/clang++
+      f77: null
+      fc: null
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: dpcpp@2022.1.0
+    paths:
+      cc: /apps/intel-ct/wrapper/icx
+      cxx: /apps/intel-ct/wrapper/dpcpp
+      f77: /apps/intel-ct/wrapper/ifx
+      fc: /apps/intel-ct/wrapper/ifx
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: gcc@8.5.0
+    paths:
+      cc: /opt/nci/bin/gcc
+      cxx: /opt/nci/bin/g++
+      f77: /opt/nci/bin/gfortran
+      fc: /opt/nci/bin/gfortran
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: intel@2021.6.0
+    paths:
+      cc: /apps/intel-ct/wrapper/icc
+      cxx: /apps/intel-ct/wrapper/icpc
+      f77: /apps/intel-ct/wrapper/ifort
+      fc: /apps/intel-ct/wrapper/ifort
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: [ ]
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: oneapi@2022.1.0
+    paths:
+      cc: /apps/intel-ct/wrapper/icx
+      cxx: /apps/intel-ct/wrapper/icpx
+      f77: /apps/intel-ct/wrapper/ifx
+      fc: /apps/intel-ct/wrapper/ifx
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: intel@2021.6.0-gcc
+    paths:
+      cc: /opt/nci/bin/gcc
+      cxx: /opt/nci/bin/g++
+      f77: /apps/intel-ct/wrapper/ifort
+      fc: /apps/intel-ct/wrapper/ifort
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
