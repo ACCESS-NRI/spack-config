@@ -116,16 +116,3 @@ compilers:
     modules: []
     environment: {}
     extra_rpaths: []
-- compiler:
-    spec: intel@2021.6.0-gcc
-    paths:
-      cc: /opt/nci/bin/gcc
-      cxx: /opt/nci/bin/g++
-      f77: /apps/intel-ct/wrapper/ifort
-      fc: /apps/intel-ct/wrapper/ifort
-    flags: {}
-    operating_system: rocky8
-    target: x86_64
-    modules: []
-    environment: {}
-    extra_rpaths: []
