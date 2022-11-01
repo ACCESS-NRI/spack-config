@@ -100,8 +100,13 @@ compilers:
     flags: {}
     operating_system: rocky8
     target: x86_64
-    modules: [ ]
-    environment: {}
+    modules: [ intel-compiler/2021.6.0 ]
+    environment: 
+      prepend_path: # Similar for append|remove_path
+        FPATH: ${OPENMPI_BASE}/include/Intel
+        LIBRARY_PATH: ${OPENMPI_BASE}/lib/Intel
+        LD_LIBRARY_PATH: ${OPENMPI_BASE}/lib/Intel
+        LD_RUN_PATH: ${OPENMPI_BASE}/lib/Intel
     extra_rpaths: []
 - compiler:
     spec: oneapi@2022.1.0
