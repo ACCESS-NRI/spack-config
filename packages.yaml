@@ -55,6 +55,7 @@ packages:
       prefix: /apps/git/2.37.3
       modules:
       - git/2.37.3
+    buildable: true
   findutils:
     externals:
     - spec: findutils@4.6.0
@@ -78,6 +79,7 @@ packages:
       prefix: /apps/cmake/3.24.2
       modules:
       - cmake/3.24.2
+    buildable: true
   groff:
     externals:
     - spec: groff@1.22.3
@@ -146,6 +148,7 @@ packages:
       prefix: /apps/python3/3.11.0
       modules:
       - python3/3.11.0
+    buildable: false
   perl:
     externals:
     - spec: perl@5.26.3~cpanm+shared+threads
@@ -281,6 +284,7 @@ packages:
       prefix: /apps/openmpi/4.1.4-debug
       modules:
       - openmpi/4.1.4-debug
+    buildable: true
   mpi:
     buildable: false
   intel-mpi:
@@ -341,6 +345,7 @@ packages:
       prefix: /apps/intel-mpi/2021.7.0
       modules:
       - intel-mpi/2021.7.0
+    buildable: true
   intel-mkl:
     externals:
     - spec: intel-mkl@2019.3.199
@@ -399,3 +404,4 @@ packages:
       prefix: /apps/intel-mkl/2022.2.0
       modules:
       - intel-mkl/2022.2.0
+    buildable: true
