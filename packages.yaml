@@ -345,7 +345,6 @@ packages:
       prefix: /apps/intel-mpi/2021.7.0
       modules:
       - intel-mpi/2021.7.0
-    buildable: true
   intel-mkl:
     externals:
     - spec: intel-mkl@2019.3.199
@@ -404,4 +403,4 @@ packages:
       prefix: /apps/intel-mkl/2022.2.0
       modules:
       - intel-mkl/2022.2.0
-    buildable: true
+    buildable: false
