@@ -126,13 +126,11 @@ def main(args):
     compilers.extend(find_modules(modstring, def_compiler_dict, verbose=args.verbose))
 
     with open("compilers.yaml", "w") as outfile:
-        print(
-            yaml.dump(
-                {"compilers": compilers},
-                outfile,
-                default_flow_style=False,
-                sort_keys=False,
-            )
+        yaml.dump(
+            {"compilers": compilers},
+            outfile,
+            default_flow_style=False,
+            sort_keys=False,
         )
 
     # Update externals from an existing packages.yaml file if it exists
