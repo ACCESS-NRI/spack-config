@@ -125,6 +125,9 @@ def main(args):
     modstring = "gcc"
     compilers.extend(find_modules(modstring, def_compiler_dict, verbose=args.verbose))
 
+    # Write compilers.yaml file to local directory.  Note that this completely
+    # overwrites the compilers.yaml file, it does not amend, or retain any
+    # configuration information
     with open("compilers.yaml", "w") as outfile:
         yaml.dump(
             {"compilers": compilers},
