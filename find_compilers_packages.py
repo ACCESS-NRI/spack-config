@@ -135,12 +135,21 @@ def main(args):
             )
         )
 
+    # Update externals from an existing packages.yaml file if it exists
+    # and contains data
     externals = {"packages": {}}
-    with open("packages.yaml", "r") as pkgfile:
-        tmp = yaml.safe_load(pkgfile)
-    if tmp is not None:
-        externals.update(tmp)
+    tmp = None
+    try:
+        with open("packages.yaml", "r") as pkgfile:
+            tmp = yaml.safe_load(pkgfile)
+    except FileNotFoundError:
+        pass
+    finally:
+        if tmp is not None:
+            externals.update(tmp)
 
+    # External packages to search for available modules.
+    # module_string: spec_string are key/value pairs
     external_packages = {
         "openmpi": "openmpi",
         "intel-mpi": "intel-mpi",
@@ -150,16 +159,17 @@ def main(args):
         "git": "git",
     }
 
-    for modstring, specstring in external_packages.items():
+    def_package_dict = {
+        "spec": None,
+        "prefix": f"/apps/",
+        "modules": [],
+    }
 
-        def_package_dict = {
-            "spec": None,
-            "prefix": f"/apps/",
-            "modules": [],
-        }
+    for modstring, specstring in external_packages.items():
 
         # Load package if it already exists, otherwise an empty dict
         package_dict = externals["packages"].get(specstring, {})
+        # Replace the list of external packages, but retain other settings
         package_dict["externals"] = find_modules(
             modstring,
             def_package_dict,
@@ -175,8 +185,6 @@ def main(args):
         yaml.safe_dump(
             data=externals, stream=pkgfile, default_flow_style=False, sort_keys=False
         )
-
-    # print(yaml.safe_dump(externals, default_flow_style=False, sort_keys=False))
 
 
 def main_argv():
