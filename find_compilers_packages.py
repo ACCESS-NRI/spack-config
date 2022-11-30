@@ -126,9 +126,11 @@ def main(args):
     with open('compilers.yaml', 'w') as outfile:
         print(yaml.dump({'compilers': compilers}, outfile, default_flow_style=False, sort_keys=False))
 
-    externals = {}
+    externals = {'packages': {}}
     with open('packages.yaml', 'r') as pkgfile:
-        externals = yaml.safe_load(pkgfile)
+        tmp = yaml.safe_load(pkgfile)
+    if tmp is not None:
+        externals.update(tmp)
 
     external_packages = {
             'openmpi': 'openmpi', 
@@ -147,15 +149,16 @@ def main(args):
             'modules': [],
         }
 
-        buildable = externals['packages'][specstring].get('buildable', True)
-        externals['packages'][specstring] = {
-            'externals': find_modules(modstring, 
-                                      def_package_dict, 
-                                      specstring=specstring, 
-                                      type='package', 
-                                      verbose=args.verbose),
-            'buildable': buildable,
-        }
+        # Load package if it already exists, otherwise an empty dict
+        package_dict = externals['packages'].get(specstring, {})
+        package_dict['externals'] = find_modules(modstring, 
+                                                 def_package_dict, 
+                                                 specstring=specstring, 
+                                                 type='package', 
+                                                 verbose=args.verbose)
+
+        # Update package
+        externals['packages'][specstring] = package_dict
 
     with open('packages.yaml', 'w') as pkgfile:
         yaml.safe_dump(data=externals, stream=pkgfile, default_flow_style=False, sort_keys=False)
