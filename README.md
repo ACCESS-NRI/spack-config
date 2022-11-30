@@ -28,4 +28,8 @@ packages:
 
 Also added `buildable: false` to a number of the other external tools to prevent unnecessary building of extraneous build tools.
 
-
+Running
+```python
+python -mpdb find_compilers_packages.py -v
+```
+will update `compilers.yaml` and `packages.yaml` in-place in the current directory. It will respect all existing packages, but update the packages specified in the script.
