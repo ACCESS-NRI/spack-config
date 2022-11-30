@@ -147,7 +147,15 @@ def main(args):
             'modules': [],
         }
 
-        externals['packages'][specstring] = {'externals': find_modules(modstring, def_package_dict, specstring=specstring, type='package', verbose=args.verbose)}
+        buildable = externals['packages'][specstring].get('buildable', True)
+        externals['packages'][specstring] = {
+            'externals': find_modules(modstring, 
+                                      def_package_dict, 
+                                      specstring=specstring, 
+                                      type='package', 
+                                      verbose=args.verbose),
+            'buildable': buildable,
+        }
 
     with open('packages.yaml', 'w') as pkgfile:
         yaml.safe_dump(data=externals, stream=pkgfile, default_flow_style=False, sort_keys=False)
