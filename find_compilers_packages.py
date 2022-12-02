@@ -41,7 +41,7 @@ def parse_args(args):
     return parser.parse_args(args)
 
 
-def find_modules(modstring, defdict, type="compiler", specstring=None, verbose=False):
+def find_modules(modstring, defdict, type="compiler", specstring=None, variants="", verbose=False):
     """
     Find all modules matching modstring, replace some values in defdict
     based on values from module to populate spack config files
@@ -60,7 +60,7 @@ def find_modules(modstring, defdict, type="compiler", specstring=None, verbose=F
         if not re.match(r"[\d.]+", version):
             continue
         moddict = copy.deepcopy(defdict)
-        moddict["spec"] = f"{specstring}@{version}"
+        moddict["spec"] = f"{specstring}@{version}{variants}"
         moddict["modules"].append(mod)
         if type == "package":
             moddict["prefix"] += mod
@@ -164,6 +164,8 @@ def main(args):
         "git": "git",
     }
 
+    variants = { "python": "+bz2+crypt+ctypes+dbm+lzma+nis+pyexpat~pythoncmd+readline+sqlite3+ssl+tix+tkinter+uuid+zlib"}
+
     def_package_dict = {
         "spec": None,
         "prefix": f"/apps/",
@@ -179,6 +181,7 @@ def main(args):
             modstring,
             def_package_dict,
             specstring=specstring,
+            variants=variants.get(specstring, ""),
             type="package",
             verbose=args.verbose,
         )

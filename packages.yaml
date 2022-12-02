@@ -124,27 +124,27 @@ packages:
     buildable: false
   python:
     externals:
-    - spec: python@3.7.4
+    - spec: python@3.7.4+bz2+crypt+ctypes+dbm+lzma+nis+pyexpat~pythoncmd+readline+sqlite3+ssl+tix+tkinter+uuid+zlib
       prefix: /apps/python3/3.7.4
       modules:
       - python3/3.7.4
-    - spec: python@3.8.5
+    - spec: python@3.8.5+bz2+crypt+ctypes+dbm+lzma+nis+pyexpat~pythoncmd+readline+sqlite3+ssl+tix+tkinter+uuid+zlib
       prefix: /apps/python3/3.8.5
       modules:
       - python3/3.8.5
-    - spec: python@3.9.2
+    - spec: python@3.9.2+bz2+crypt+ctypes+dbm+lzma+nis+pyexpat~pythoncmd+readline+sqlite3+ssl+tix+tkinter+uuid+zlib
       prefix: /apps/python3/3.9.2
       modules:
       - python3/3.9.2
-    - spec: python@3.10.0
+    - spec: python@3.10.0+bz2+crypt+ctypes+dbm+lzma+nis+pyexpat~pythoncmd+readline+sqlite3+ssl+tix+tkinter+uuid+zlib
       prefix: /apps/python3/3.10.0
       modules:
       - python3/3.10.0
-    - spec: python@3.10.4
+    - spec: python@3.10.4+bz2+crypt+ctypes+dbm+lzma+nis+pyexpat~pythoncmd+readline+sqlite3+ssl+tix+tkinter+uuid+zlib
       prefix: /apps/python3/3.10.4
       modules:
       - python3/3.10.4
-    - spec: python@3.11.0
+    - spec: python@3.11.0+bz2+crypt+ctypes+dbm+lzma+nis+pyexpat~pythoncmd+readline+sqlite3+ssl+tix+tkinter+uuid+zlib
       prefix: /apps/python3/3.11.0
       modules:
       - python3/3.11.0
