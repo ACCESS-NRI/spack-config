@@ -1,6 +1,6 @@
 compilers:
 - compiler:
-    spec: intel-compiler@2019.3.199
+    spec: intel@2019.3.199
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
@@ -14,7 +14,7 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel-compiler@2019.4.243
+    spec: intel@2019.4.243
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
@@ -28,7 +28,7 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel-compiler@2019.5.281
+    spec: intel@2019.5.281
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
@@ -42,7 +42,7 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel-compiler@2020.0.166
+    spec: intel@2020.0.166
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
@@ -56,7 +56,7 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel-compiler@2020.1.217
+    spec: intel@2020.1.217
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
@@ -70,7 +70,7 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel-compiler@2020.2.254
+    spec: intel@2020.2.254
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
@@ -84,7 +84,7 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel-compiler@2020.3.304
+    spec: intel@2020.3.304
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
@@ -98,7 +98,7 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel-compiler@2021.1.1
+    spec: intel@2021.1.1
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
@@ -112,7 +112,7 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel-compiler@2021.2.0
+    spec: intel@2021.2.0
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
@@ -126,7 +126,7 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel-compiler@2021.3.0
+    spec: intel@2021.3.0
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
@@ -140,7 +140,7 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel-compiler@2021.4.0
+    spec: intel@2021.4.0
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
@@ -154,7 +154,7 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel-compiler@2021.5.0
+    spec: intel@2021.5.0
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
@@ -168,7 +168,7 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel-compiler@2021.6.0
+    spec: intel@2021.6.0
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
@@ -182,7 +182,7 @@ compilers:
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: intel-compiler@2021.7.0
+    spec: intel@2021.7.0
     paths:
       cc: /apps/intel-ct/wrapper/icc
       cxx: /apps/intel-ct/wrapper/icpc
