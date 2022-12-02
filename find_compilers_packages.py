@@ -93,7 +93,11 @@ def main(args):
     }
 
     modstring = "intel-compiler"
-    compilers.extend(find_modules(modstring, def_compiler_dict, verbose=args.verbose))
+    compilers.extend(
+        find_modules(
+            modstring, def_compiler_dict, specstring="intel", verbose=args.verbose
+        )
+    )
 
     # Update paths for oneAPI compiler modules
     def_compiler_dict["paths"].update(
