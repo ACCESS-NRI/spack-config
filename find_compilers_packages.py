@@ -164,7 +164,7 @@ def main(args):
         "git": "git",
     }
 
-    variants = { "python": "+bz2+crypt+ctypes+dbm+lzma+nis+pyexpat~pythoncmd+readline+sqlite3+ssl+tix+tkinter+uuid+zlib"}
+    variants = { "python": "+bz2+ctypes+dbm+lzma+nis+pyexpat~pythoncmd+readline+sqlite3+ssl+tix+tkinter+uuid+zlib"}
 
     def_package_dict = {
         "spec": None,
