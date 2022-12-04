@@ -1,4 +1,8 @@
 packages:
+  all:
+    compiler: [intel2021.6.0, intel, oneapi, gcc]
+    providers:
+      mpi: [openmpi@4.1.2, openmpi, intelmpi]
   pkgconf:
     externals:
     - spec: pkgconf@1.4.2
