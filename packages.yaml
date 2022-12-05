@@ -1,7 +1,7 @@
 packages:
   all:
     compiler:
-    - intel2021.6.0
+    - intel@2021.6.0
     - intel
     - oneapi
     - gcc
