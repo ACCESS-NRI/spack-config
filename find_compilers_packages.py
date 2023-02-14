@@ -41,7 +41,8 @@ def parse_args(args):
     return parser.parse_args(args)
 
 
-def find_modules(modstring, defdict, type="compiler", specstring=None, variants="", verbose=False):
+def find_modules(modstring, defdict, type="compiler", specstring=None, variants="", 
+                 verbose=False, prefix=None):
     """
     Find all modules matching modstring, replace some values in defdict
     based on values from module to populate spack config files
@@ -63,7 +64,11 @@ def find_modules(modstring, defdict, type="compiler", specstring=None, variants=
         moddict["spec"] = f"{specstring}@{version}{variants}"
         moddict["modules"].append(mod)
         if type == "package":
-            moddict["prefix"] += mod
+            if prefix is not None:
+                path_prefix = prefix.format(mod=mod, version=version)
+            else:
+                path_prefix = mod
+            moddict["prefix"] += str(path_prefix)
             modlist.append(moddict)
         else:
             modlist.append({type: moddict})
@@ -172,6 +177,10 @@ def main(args):
         "modules": [],
     }
 
+    prefix_configure = {
+        "intel-mkl":  "intel-ct/{version}/mkl"
+    }
+
     for modstring, specstring in external_packages.items():
 
         # Load package if it already exists, otherwise an empty dict
@@ -184,6 +193,7 @@ def main(args):
             variants=variants.get(specstring, ""),
             type="package",
             verbose=args.verbose,
+            prefix=prefix_configure.get(modstring, None)
         )
 
         # Update package
