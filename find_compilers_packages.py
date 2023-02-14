@@ -178,7 +178,7 @@ def main(args):
     }
 
     prefix_configure = {
-        "intel-mkl":  "intel-ct/{version}/mkl"
+        "intel-mkl": "intel/compilers_and_libraries_{version}/linux/mkl"
     }
 
     for modstring, specstring in external_packages.items():
