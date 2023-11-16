@@ -5,6 +5,7 @@
 # $PREFIX/spack
 # $PREFIX/spack_config
 # $PREFIX/spack_packages
+# $PREFIX/release (defined in $PREFIX/spack_config/config.yaml)
 
 # This file is located at $PREFIX/spack_config/$0
 
