@@ -1,0 +1,24 @@
+name: Update Deployment Repos
+on:
+  push:
+    branches:
+      - main
+jobs:
+  update:
+    name: Update
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup SSH
+        id: ssh
+        uses: access-nri/actions/.github/actions/setup-ssh@main
+        with:
+          hosts: ${{ secrets.HOST }}
+          private-key: ${{ secrets.SSH_KEY }}
+      - name: Pull Deployment spack_config
+        # This command sshs into the given host, and finds all the version directories that spack_config 
+        # is installed in, then updates them
+        run: |
+          ssh ${{ secrets.USER }}@${{ secrets.HOST }} -i ${{ steps.ssh.outputs.private-key-path }} /bin/bash <<'EOT'
+          cd ${{ vars.ROOT_SPACK_LOCATION }}
+          find . -maxdepth 1 -mindepth 1 -type d -exec git -C '{}/spack_config' pull \;
+          EOT
