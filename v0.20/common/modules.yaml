@@ -1,0 +1,26 @@
+# Refer to https://spack.readthedocs.io/en/latest/module_file_support.html
+modules:
+  default:
+    enable:
+    - tcl
+    roots:
+      tcl: $spack/../release/modules
+      lmod: $spack/../release/lmod
+    tcl:
+      hash_length: 0
+      exclude_implicits: true
+      include:
+      - access-om2
+      - mom5
+      - cice5
+      - libaccessom2
+      - oasis3-mct
+      all:
+        autoload: direct
+        conflict:
+        - '{name}'
+        environment:
+          set:
+            'SPACK_{name}_ROOT': '{prefix}'
+      projections:
+        all: '{name}/{version}'
