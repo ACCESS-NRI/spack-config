@@ -1,12 +1,12 @@
 # This is not an executable! Do not enable execute permissions.
 # You need to be running a bash shell, then execute: . spack-start.bash
-# This file is in $PREFIX/spack_config/
+# This file is in $PREFIX/spack-config/
 
 # Required layout:
 # $PREFIX/spack
-# $PREFIX/spack_config
-# $PREFIX/spack_packages
-# $PREFIX/release (defined in $PREFIX/spack_config/*/*/config.yaml)
+# $PREFIX/spack-config
+# $PREFIX/spack-packages
+# $PREFIX/release (defined in $PREFIX/spack-config/*/*/config.yaml)
 
 set -x
 PREFIX="$(dirname $BASH_SOURCE)/.."
