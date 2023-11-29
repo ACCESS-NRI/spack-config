@@ -7,6 +7,7 @@ jobs:
   update:
     name: Update
     runs-on: ubuntu-latest
+    environment: "Gadi"
     steps:
       - name: Setup SSH
         id: ssh
