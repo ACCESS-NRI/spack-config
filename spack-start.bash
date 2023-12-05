@@ -8,11 +8,6 @@
 # $PREFIX/spack-packages
 # $PREFIX/release (defined in $PREFIX/spack-config/*/*/config.yaml)
 
-set -x
-PREFIX="$(dirname $BASH_SOURCE)/.."
-SPACK="$PREFIX/spack"
-set +x
-
 # https://spack-tutorial.readthedocs.io/en/latest/tutorial_configuration.html#yaml-format
 #
 # When Spack checks its configuration, the configuration scopes are updated
@@ -34,4 +29,4 @@ export SPACK_DISABLE_LOCAL_CONFIG="true"
 # TODO: Decide on the version of Python that we approve.
 #export SPACK_PYTHON=
 
-. $SPACK/share/spack/setup-env.sh
+. $(dirname $BASH_SOURCE)/../spack/share/spack/setup-env.sh
