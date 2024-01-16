@@ -1,0 +1,6 @@
+packages:
+  cmake:
+    # Syntax for requirement:
+    require: "@3.24.2"
+    # Syntax for preference:
+    #version: [3.24.2]
