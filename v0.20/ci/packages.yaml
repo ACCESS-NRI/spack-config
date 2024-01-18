@@ -1,4 +1,9 @@
 packages:
+  perl:
+    externals:
+    - spec: perl@5.26.3~cpanm+shared+threads
+      prefix: /usr
+    buildable: false
   cmake:
     # Syntax for requirement:
     require: "@3.24.2"
