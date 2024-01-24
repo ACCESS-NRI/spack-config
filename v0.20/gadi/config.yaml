@@ -1,4 +1,1 @@
-config:
-  install_tree:
-    # Completely ignoring higher-level configuration options is supported with the :: notation for keys ...
-    root:: $spack/../release
+../../common/config.yaml
