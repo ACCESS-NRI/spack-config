@@ -1,5 +1,5 @@
 # This is not an executable! Do not enable execute permissions.
-# You need to be running a bash shell, then execute: . spack-start.bash
+# You need to be running a bash shell, then execute: . spack-enable.bash
 # This file is in $PREFIX/spack-config/
 
 # Required layout:

@@ -7,7 +7,7 @@ This repository contains:
   * The `gadi` directory is to be used in Gadi deployments.
   * The `common` directory is a subset of required configuration files and should not be used directly.
 
-* `spack-start.bash` is for general users to set their `bash` environment to directly run `spack` commands using ACCESS-NRI's Spack instance(s). Execute: `. spack-start.bash`. It disables local configuration changes in `~/.spack`. Advanced users should use the methods described in the Spack documentation, including setting `$SPACK_INSTALL_TREE` to a writeable directory.
+* `spack-enable.bash` is for general users to set their `bash` environment to directly run `spack` commands using ACCESS-NRI's Spack instance(s). Execute: `. spack-enable.bash`. It disables local configuration changes in `~/.spack`. Advanced users should use the methods described in the Spack documentation, including setting `$SPACK_INSTALL_TREE` to a writeable directory.
 
 ## Usage
 
