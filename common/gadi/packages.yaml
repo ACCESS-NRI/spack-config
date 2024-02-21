@@ -2,7 +2,7 @@ packages:
   all:
     providers:
       # Completely ignoring higher-level configuration options is supported with the :: notation for keys ...
-      mpi:: [nci-openmpi, openmpi]
+      mpi:: [openmpi]
   perl:
     externals:
     - spec: perl@5.26.3~cpanm+shared+threads
@@ -13,9 +13,9 @@ packages:
     - spec: cmake@3.24.2
       prefix: /apps/cmake/3.24.2
     buildable: false
-  nci-openmpi:
+  openmpi:
     externals:
-    - spec: nci-openmpi@4.0.2
+    - spec: openmpi@4.0.2
       prefix: /apps/openmpi/4.0.2
       modules:
       - openmpi/4.0.2
