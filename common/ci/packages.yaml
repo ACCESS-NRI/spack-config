@@ -6,8 +6,8 @@ packages:
     buildable: false
   cmake:
     # Syntax for requirement:
-    require: "@3.24.2"
+    require: "@3.24.4"
     # Syntax for preference:
-    #version: [3.24.2]
+    #version: [3.24.4]
   libtool:
     version: [:2.4.6]
