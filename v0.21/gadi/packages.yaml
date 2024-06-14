@@ -52,3 +52,7 @@ packages:
       prefix: /apps/openmpi/4.1.5
       modules: [openmpi/4.1.5]
     buildable: false
+  hdf5:
+    require:
+    - one_of: ['@1.14.3','@:']
+      message: 'FPE bug in hdf5@1.14.3 is not patched in Spack versions earlier than v0.22'
