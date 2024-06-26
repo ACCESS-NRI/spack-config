@@ -68,5 +68,9 @@ else
     return 1
 fi
 
+
+# https://github.com/spack/spack/issues/27704
+export SPACK_USER_CACHE_PATH="${CONFIGDIR}/../"
+
 . ${CONFIGDIR}/../spack/share/spack/setup-env.sh
 unset CONFIGDIR
