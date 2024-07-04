@@ -118,19 +118,6 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: dpcpp@=2021.1
-    paths:
-      cc: /apps/intel-ct/wrapper/icx
-      cxx: /apps/intel-ct/wrapper/dpcpp
-      f77: /apps/intel-ct/wrapper/ifx
-      fc: /apps/intel-ct/wrapper/ifx
-    flags: {}
-    operating_system: rocky8
-    target: x86_64
-    modules: [intel-compiler/2021.1.1]
-    environment: {}
-    extra_rpaths: []
-- compiler:
     spec: intel@=2021.1
     paths:
       cc: /apps/intel-ct/wrapper/icc
@@ -154,19 +141,6 @@ compilers::
     operating_system: rocky8
     target: x86_64
     modules: [intel-compiler/2021.1.1]
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: dpcpp@=2021.2.0
-    paths:
-      cc: /apps/intel-ct/wrapper/icx
-      cxx: /apps/intel-ct/wrapper/dpcpp
-      f77: /apps/intel-ct/wrapper/ifx
-      fc: /apps/intel-ct/wrapper/ifx
-    flags: {}
-    operating_system: rocky8
-    target: x86_64
-    modules: [intel-compiler/2021.2.0]
     environment: {}
     extra_rpaths: []
 - compiler:
@@ -196,19 +170,6 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: dpcpp@=2021.3.0
-    paths:
-      cc: /apps/intel-ct/wrapper/icx
-      cxx: /apps/intel-ct/wrapper/dpcpp
-      f77: /apps/intel-ct/wrapper/ifx
-      fc: /apps/intel-ct/wrapper/ifx
-    flags: {}
-    operating_system: rocky8
-    target: x86_64
-    modules: [intel-compiler/2021.3.0]
-    environment: {}
-    extra_rpaths: []
-- compiler:
     spec: intel@=2021.3.0
     paths:
       cc: /apps/intel-ct/wrapper/icc
@@ -232,19 +193,6 @@ compilers::
     operating_system: rocky8
     target: x86_64
     modules: [intel-compiler/2021.3.0]
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: dpcpp@=2021.4.0
-    paths:
-      cc: /apps/intel-ct/wrapper/icx
-      cxx: /apps/intel-ct/wrapper/dpcpp
-      f77: /apps/intel-ct/wrapper/ifx
-      fc: /apps/intel-ct/wrapper/ifx
-    flags: {}
-    operating_system: rocky8
-    target: x86_64
-    modules: [intel-compiler/2021.4.0]
     environment: {}
     extra_rpaths: []
 - compiler:
@@ -274,19 +222,6 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: dpcpp@=2022.0.0
-    paths:
-      cc: /apps/intel-ct/wrapper/icx
-      cxx: /apps/intel-ct/wrapper/dpcpp
-      f77: /apps/intel-ct/wrapper/ifx
-      fc: /apps/intel-ct/wrapper/ifx
-    flags: {}
-    operating_system: rocky8
-    target: x86_64
-    modules: [intel-compiler/2021.5.0]
-    environment: {}
-    extra_rpaths: []
-- compiler:
     spec: intel@=2021.5.0
     paths:
       cc: /apps/intel-ct/wrapper/icc
@@ -310,19 +245,6 @@ compilers::
     operating_system: rocky8
     target: x86_64
     modules: [intel-compiler/2021.5.0]
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: dpcpp@=2022.1.0
-    paths:
-      cc: /apps/intel-ct/wrapper/icx
-      cxx: /apps/intel-ct/wrapper/dpcpp
-      f77: /apps/intel-ct/wrapper/ifx
-      fc: /apps/intel-ct/wrapper/ifx
-    flags: {}
-    operating_system: rocky8
-    target: x86_64
-    modules: [intel-compiler/2021.6.0]
     environment: {}
     extra_rpaths: []
 - compiler:
@@ -352,19 +274,6 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: dpcpp@=2022.2.0
-    paths:
-      cc: /apps/intel-ct/wrapper/icx
-      cxx: /apps/intel-ct/wrapper/dpcpp
-      f77: /apps/intel-ct/wrapper/ifx
-      fc: /apps/intel-ct/wrapper/ifx
-    flags: {}
-    operating_system: rocky8
-    target: x86_64
-    modules: [intel-compiler/2021.7.0]
-    environment: {}
-    extra_rpaths: []
-- compiler:
     spec: intel@=2021.7.0
     paths:
       cc: /apps/intel-ct/wrapper/icc
@@ -388,19 +297,6 @@ compilers::
     operating_system: rocky8
     target: x86_64
     modules: [intel-compiler/2021.7.0]
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: dpcpp@=2023.0.0
-    paths:
-      cc: /apps/intel-ct/wrapper/icx
-      cxx: /apps/intel-ct/wrapper/dpcpp
-      f77: /apps/intel-ct/wrapper/ifx
-      fc: /apps/intel-ct/wrapper/ifx
-    flags: {}
-    operating_system: rocky8
-    target: x86_64
-    modules: [intel-compiler/2021.8.0]
     environment: {}
     extra_rpaths: []
 - compiler:
@@ -430,19 +326,6 @@ compilers::
     environment: {}
     extra_rpaths: []
 - compiler:
-    spec: dpcpp@=2023.2.0
-    paths:
-      cc: /apps/intel-ct/wrapper/icx
-      cxx: /apps/intel-ct/wrapper/dpcpp
-      f77: /apps/intel-ct/wrapper/ifx
-      fc: /apps/intel-ct/wrapper/ifx
-    flags: {}
-    operating_system: rocky8
-    target: x86_64
-    modules: [intel-compiler/2021.10.0]
-    environment: {}
-    extra_rpaths: []
-- compiler:
     spec: intel@=2021.10.0
     paths:
       cc: /apps/intel-ct/wrapper/icc
@@ -466,19 +349,6 @@ compilers::
     operating_system: rocky8
     target: x86_64
     modules: [intel-compiler/2021.10.0]
-    environment: {}
-    extra_rpaths: []
-- compiler:
-    spec: dpcpp@=2024.0.2
-    paths:
-      cc: /apps/intel-tools/wrappers/icx
-      cxx: /apps/intel-tools/wrappers/dpcpp
-      f77: /apps/intel-tools/wrappers/ifx
-      fc: /apps/intel-tools/wrappers/ifx
-    flags: {}
-    operating_system: rocky8
-    target: x86_64
-    modules: [intel-compiler-llvm/2024.0.2]
     environment: {}
     extra_rpaths: []
 - compiler:
