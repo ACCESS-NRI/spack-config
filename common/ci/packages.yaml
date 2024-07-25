@@ -1,7 +1,7 @@
 packages:
   perl:
     externals:
-    - spec: perl@5.26.3~cpanm+shared+threads
+    - spec: perl@5.26.3
       prefix: /usr
     buildable: false
   cmake:
