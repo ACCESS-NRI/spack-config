@@ -1,7 +1,7 @@
 # Completely ignoring higher-level configuration options is supported with the :: notation for keys ...
 compilers::
 - compiler:
-    spec: clang@=16.0.6
+    spec: clang@=17.0.6
     paths:
       cc: /bin/clang
       cxx: /bin/clang++
@@ -375,5 +375,70 @@ compilers::
     operating_system: rocky8
     target: x86_64
     modules: [intel-compiler-llvm/2024.0.2]
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: gcc@=10.3.0
+    paths:
+      cc: /apps/gcc/10.3.0/wrappers/gcc
+      cxx: /apps/gcc/10.3.0/wrappers/g++
+      f77: /apps/gcc/10.3.0/wrappers/gfortran
+      fc: /apps/gcc/10.3.0/wrappers/gfortran
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: [gcc/10.3.0]
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: gcc@=11.1.0
+    paths:
+      cc: /apps/gcc/11.1.0/wrappers/gcc
+      cxx: /apps/gcc/11.1.0/wrappers/g++
+      f77: /apps/gcc/11.1.0/wrappers/gfortran
+      fc: /apps/gcc/11.1.0/wrappers/gfortran
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: [gcc/11.1.0]
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: gcc@=12.2.0
+    paths:
+      cc: /apps/gcc/12.2.0/wrappers/gcc
+      cxx: /apps/gcc/12.2.0/wrappers/g++
+      f77: /apps/gcc/12.2.0/wrappers/gfortran
+      fc: /apps/gcc/12.2.0/wrappers/gfortran
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: [gcc/12.2.0]
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: gcc@=13.2.0
+    paths:
+      cc: /apps/gcc/13.2.0/wrappers/gcc
+      cxx: /apps/gcc/13.2.0/wrappers/g++
+      f77: /apps/gcc/13.2.0/wrappers/gfortran
+      fc: /apps/gcc/13.2.0/wrappers/gfortran
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: [gcc/13.2.0]
+    environment: {}
+    extra_rpaths: []
+- compiler:
+    spec: gcc@=14.1.0
+    paths:
+      cc: /apps/gcc/14.1.0/wrappers/gcc
+      cxx: /apps/gcc/14.1.0/wrappers/g++
+      f77: /apps/gcc/14.1.0/wrappers/gfortran
+      fc: /apps/gcc/14.1.0/wrappers/gfortran
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: [gcc/14.1.0]
     environment: {}
     extra_rpaths: []
