@@ -3,11 +3,6 @@ packages:
     providers:
       # Completely ignoring higher-level configuration options is supported with the :: notation for keys ...
       mpi:: [openmpi]
-  perl:
-    externals:
-    - spec: perl@5.26.3
-      prefix: /usr
-    buildable: false
   cmake:
     externals:
     - spec: cmake@3.24.2
@@ -289,4 +284,26 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.1.5/include/Intel
+    buildable: false
+  perl:
+    externals:
+    - spec: perl@5.26.3
+      prefix: /usr
+    buildable: false
+  python:
+    externals:
+    - spec: python@3.11.7
+      prefix: /apps/python3/3.11.7
+      modules: [python3/3.11.7]
+      # $ module show python3-as-python
+      # -------------------------------------------------------------------
+      # /apps/Modules/modulefiles/python3-as-python:
+      #
+      # conflict        python2-as-python
+      # setenv          NCI_PYTHONX_AS_PYTHON python3
+      # -------------------------------------------------------------------
+      extra_attributes:
+        environment:
+          set:
+            NCI_PYTHONX_AS_PYTHON: python3
     buildable: false
