@@ -20,10 +20,5 @@ modules:
       # hide_implicits: true
       all:
         autoload: direct
-        conflict:
-        - '{name}'
-        environment:
-          set:
-            'SPACK_{name}_ROOT': '{prefix}'
       projections:
-        all: '{name}/{version}'
+        all: '{name}/{version}-{hash:7}'
