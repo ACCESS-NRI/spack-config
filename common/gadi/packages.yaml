@@ -298,7 +298,7 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.1.5/include/Intel
-    - spec: openmpi@4.1.5 %oneapi
+    - spec: openmpi@4.1.7 %oneapi
       prefix: /apps/openmpi/4.1.7
       modules: [openmpi/4.1.7]
       extra_attributes:
