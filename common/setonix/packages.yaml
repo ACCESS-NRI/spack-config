@@ -1,0 +1,16 @@
+packages:
+  perl:
+    externals:
+    - spec: perl@5.26.1
+      prefix: /usr
+    buildable: false
+  cmake:
+    externals:
+    - spec: cmake@3.27.7
+      prefix: /software/setonix/2024.05/software/linux-sles15-zen3/gcc-12.2.0/cmake-3.27.7-ylzyjfdeksq6jhz63zyo3qixmhm6t4kx/
+      modules: [cmake/3.27.7]
+    buildable: true
+  libtool:
+    version: [:2.4.6]
+  openmpi:
+    version: [4.1.1:]
