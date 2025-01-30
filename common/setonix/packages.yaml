@@ -1,4 +1,7 @@
 packages:
+  all:
+    providers:
+      mpi: [ cray-mpich ]
   perl:
     externals:
     - spec: perl@5.26.1
@@ -14,3 +17,23 @@ packages:
     version: [:2.4.6]
   openmpi:
     version: [4.1.1:]
+  # From https://github.com/PawseySC/pawsey-spack-config/
+  # systems/setonix/configs/site/packages.yaml
+  cray-mpich:
+    externals:
+    - spec: cray-mpich@8.1.30%gcc
+      modules:
+      - cray-mpich/8.1.30
+      - craype-network-ofi
+      prefix: /opt/cray/pe/mpich/8.1.30/ofi/gnu/12.3
+    - spec: cray-mpich@8.1.30%cce
+      modules:
+      - cray-mpich/8.1.30
+      - craype-network-ofi
+      prefix: /opt/cray/pe/mpich/8.1.30/ofi/crayclang/17.0
+    - spec: cray-mpich@8.1.30%aocc
+      modules:
+      - cray-mpich/8.1.30
+      - craype-network-ofi
+      prefix: /opt/cray/pe/mpich/8.1.30/ofi/aocc/4.1
+    buildable: false
