@@ -109,6 +109,13 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.1.7/include/GNU
+    - spec: openmpi@5.0.5 %gcc
+      prefix: /apps/openmpi/5.0.5
+      modules: [openmpi/5.0.5]
+      extra_attributes:
+        environment:
+          prepend_path:
+            CMAKE_PREFIX_PATH: /apps/openmpi/5.0.5/include/GNU
     - spec: openmpi@4.0.1 %intel
       prefix: /apps/openmpi/4.0.1
       modules: [openmpi/4.0.1]
@@ -207,6 +214,13 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.1.7/include/Intel
+    - spec: openmpi@5.0.5 %intel
+      prefix: /apps/openmpi/5.0.5
+      modules: [openmpi/5.0.5]
+      extra_attributes:
+        environment:
+          prepend_path:
+            CMAKE_PREFIX_PATH: /apps/openmpi/5.0.5/include/Intel
     - spec: openmpi@4.0.1 %oneapi
       prefix: /apps/openmpi/4.0.1
       modules: [openmpi/4.0.1]
@@ -305,6 +319,13 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.1.7/include/Intel
+    - spec: openmpi@5.0.5 %oneapi
+      prefix: /apps/openmpi/5.0.5
+      modules: [openmpi/5.0.5]
+      extra_attributes:
+        environment:
+          prepend_path:
+            CMAKE_PREFIX_PATH: /apps/openmpi/5.0.5/include/Intel
     buildable: false
   perl:
     externals:
