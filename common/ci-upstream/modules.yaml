@@ -1,0 +1,24 @@
+# Refer to https://spack.readthedocs.io/en/latest/module_file_support.html
+modules:
+  default:
+    enable:
+    - tcl
+    roots:
+      tcl: $spack/../upstream/modules
+      lmod: $spack/../upstream/lmod
+    tcl:
+      hash_length: 0
+      # Looks like we need to use exclude_implicits because Gadi has
+      # an old version of modules:
+      # $ module --version
+      # Modules Release 4.3.0 (2019-07-26)
+      # https://github.com/spack/spack/issues/40940
+      exclude_implicits: true
+      # Does this PR imply exclude_implicits and hide_implicits can not
+      # be used together?:
+      # https://github.com/spack/spack/pull/40955
+      # hide_implicits: true
+      all:
+        autoload: direct
+      projections:
+        all: '{name}/{version}-{hash:7}'
