@@ -1,0 +1,5 @@
+upstreams:
+  upstream:
+    # Assumes that from the runners point of view, the volume mount 
+    # point for the containerised upstream install_tree is /opt/upstream
+    install_tree: /opt/upstream
