@@ -1,10 +1,5 @@
 # While not a true spack configuration file, this view snippet is injected
-#  into build-ci spack manifests to consistently configure a custom view for the
-#  CI runner.
+#  into build-ci spack manifests to consistently disable views.
 # This is used to get around the error of projections having the same prefix
 #  when using concretizer.unify:when_possible.
-view:
-  default:
-    root: $SPACK_ROOT/../views
-    projections:
-      all: '{name}/{version}-{compiler.name}-{compiler.version}-{hash:7}'
+view: false
