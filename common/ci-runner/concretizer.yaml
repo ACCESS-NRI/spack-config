@@ -1,5 +1,5 @@
 concretizer:
-  unify: when_possible
+  unify: false
   targets:
     # Completely ignoring higher-level configuration options is supported with the :: notation for keys ...
     granularity:: generic
