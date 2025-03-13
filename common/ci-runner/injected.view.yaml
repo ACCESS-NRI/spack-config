@@ -1,5 +1,5 @@
 # While not a true spack configuration file, this view snippet is injected
-#  into build-ci spack manifests to consistently disable views.
+#  into build-ci spack manifests to disable views by default.
 # This is used to get around the error of projections having the same prefix
-#  when using concretizer.unify:when_possible.
+#  when using concretizer.unify:when_possible/false.
 view: false

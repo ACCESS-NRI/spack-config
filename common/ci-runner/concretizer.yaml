@@ -1,4 +1,5 @@
 concretizer:
+  # Don't unify dependencies due to possibility of package clashes in CI
   unify: false
   targets:
     # Completely ignoring higher-level configuration options is supported with the :: notation for keys ...
