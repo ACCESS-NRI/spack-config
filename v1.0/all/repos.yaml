@@ -1,0 +1,3 @@
+# Completely ignoring higher-level configuration options is supported with the :: notation for keys ...
+repos:
+- $spack/../spack-packages/spack_repo/access/nri
