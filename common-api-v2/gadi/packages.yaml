@@ -374,6 +374,62 @@ packages:
     buildable: false
   gcc:
     externals:
+    - spec: gcc@15.1.0 languages:='c,c++,fortran'
+      prefix: /apps/gcc/15.1.0/wrappers
+      modules: [gcc/15.1.0]
+      extra_attributes:
+        compilers:
+          c: /apps/gcc/15.1.0/wrappers/gcc
+          cxx: /apps/gcc/15.1.0/wrappers/g++
+          fortran: /apps/gcc/15.1.0/wrappers/gfortran
+    - spec: gcc@14.2.0 languages:='c,c++,fortran'
+      prefix: /apps/gcc/14.2.0/wrappers
+      modules: [gcc/14.2.0]
+      extra_attributes:
+        compilers:
+          c: /apps/gcc/14.2.0/wrappers/gcc
+          cxx: /apps/gcc/14.2.0/wrappers/g++
+          fortran: /apps/gcc/14.2.0/wrappers/gfortran
+    - spec: gcc@14.1.0 languages:='c,c++,fortran'
+      prefix: /apps/gcc/14.1.0/wrappers
+      modules: [gcc/14.1.0]
+      extra_attributes:
+        compilers:
+          c: /apps/gcc/14.1.0/wrappers/gcc
+          cxx: /apps/gcc/14.1.0/wrappers/g++
+          fortran: /apps/gcc/14.1.0/wrappers/gfortran
+    - spec: gcc@13.2.0 languages:='c,c++,fortran'
+      prefix: /apps/gcc/13.2.0/wrappers
+      modules: [gcc/13.2.0]
+      extra_attributes:
+        compilers:
+          c: /apps/gcc/13.2.0/wrappers/gcc
+          cxx: /apps/gcc/13.2.0/wrappers/g++
+          fortran: /apps/gcc/13.2.0/wrappers/gfortran
+    - spec: gcc@12.2.0 languages:='c,c++,fortran'
+      prefix: /apps/gcc/12.2.0/wrappers
+      modules: [gcc/12.2.0]
+      extra_attributes:
+        compilers:
+          c: /apps/gcc/12.2.0/wrappers/gcc
+          cxx: /apps/gcc/12.2.0/wrappers/g++
+          fortran: /apps/gcc/12.2.0/wrappers/gfortran
+    - spec: gcc@11.1.0 languages:='c,c++,fortran'
+      prefix: /apps/gcc/11.1.0/wrappers
+      modules: [gcc/11.1.0]
+      extra_attributes:
+        compilers:
+          c: /apps/gcc/11.1.0/wrappers/gcc
+          cxx: /apps/gcc/11.1.0/wrappers/g++
+          fortran: /apps/gcc/11.1.0/wrappers/gfortran
+    - spec: gcc@10.3.0 languages:='c,c++,fortran'
+      prefix: /apps/gcc/10.3.0/wrappers
+      modules: [gcc/10.3.0]
+      extra_attributes:
+        compilers:
+          c: /apps/gcc/10.3.0/wrappers/gcc
+          cxx: /apps/gcc/10.3.0/wrappers/g++
+          fortran: /apps/gcc/10.3.0/wrappers/gfortran
     - spec: gcc@8.5.0 languages:='c,c++,fortran'
       prefix: /usr
       extra_attributes:
