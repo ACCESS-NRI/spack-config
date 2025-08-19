@@ -3,5 +3,5 @@ repos::
   access_spack_packages: $spack/../spack-packages/spack_repo/access/nri
   builtin:
     git: https://github.com/spack/spack-packages.git
-    # Fix external Intel classic compiler (#981)
-    commit: 1788fb4b16f4e1478e149de56ba3040d8d5f51d6
+    # FMS: add 2025 releases and limit io deprecation variant (#790)
+    commit: 60517d15b003ddb01214ae1f949fc1180cb68049
