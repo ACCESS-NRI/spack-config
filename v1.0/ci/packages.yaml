@@ -1,13 +1,1 @@
-packages:
-  perl:
-    externals:
-    - spec: perl@5.26.3
-      prefix: /usr
-    buildable: false
-  cmake:
-    # Syntax for requirement:
-    require: "@3.31.6"
-    # Syntax for preference:
-    #version: [3.31.6]
-  libtool:
-    version: [:2.4.6]
+../../common/ci/packages.yaml
