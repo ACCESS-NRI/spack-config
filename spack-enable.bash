@@ -44,26 +44,13 @@ then
     # git -C ${prefix}/spack branch
     # hostname --fqdn
 
-# NOTE: This option is for CI/CD
-elif [ "$#" -eq 1 ]
+# NOTE: This option is for build-ci
+elif [[ "${1}" == "ci" || "${1}" == "ci-compiler-find" ]]
 then
-    CONFIG="${CONFIGDIR}/${1}"
-    if [ ! -d "${CONFIG}" ]
-    then
-        echo "Directory ${CONFIG} does not exist."
-        unset CONFIG
-        unset CONFIGDIR
-        return 1
-    fi
-
-    echo "Using configuration in ${CONFIG}"
     unset SPACK_DISABLE_LOCAL_CONFIG
-    export SPACK_USER_CONFIG_PATH="${CONFIG}"
-    export SPACK_SYSTEM_CONFIG_PATH="${CONFIG}"
-    unset CONFIG
-
+    echo "Using configuration in spack/etc/spack, with CI user config enabled"
 else
-    echo "Usage: . ${PROGNAME} [<spack-version>/{ci,gadi}]"
+    echo "Usage: . ${PROGNAME} [ci|ci-compiler-find]"
     unset CONFIGDIR
     return 1
 fi
@@ -74,3 +61,22 @@ export SPACK_USER_CACHE_PATH="${CONFIGDIR}/../"
 
 . ${CONFIGDIR}/../spack/share/spack/setup-env.sh
 unset CONFIGDIR
+
+if [ "${1}" == "ci-compiler-find" ]
+then
+    upstream_compilers_file="${ENV_COMPILERS_SPACK_MANIFEST:-/opt/compilers.spack.yaml}"
+    echo "Loading compilers from $upstream_compilers_file..."
+
+    if [ ! -x "$(command -v yq)" ]; then
+        echo "Error: yq is not installed, but needs to be for spack compiler lookup."
+        unset upstream_compilers_file
+        exit 1
+    fi
+
+    yq '.spack.specs[]' "$upstream_compilers_file" | while read -r compiler; do
+        spack load "$compiler" || exit
+        spack compiler find --scope=user
+    done
+    echo "Compilers loaded."
+    unset upstream_compilers_file
+fi
