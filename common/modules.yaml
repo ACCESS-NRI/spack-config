@@ -18,6 +18,11 @@ modules:
       # be used together?:
       # https://github.com/spack/spack/pull/40955
       # hide_implicits: true
+      openmpi:
+        environment:
+          set:
+            UCC_LOG_LEVEL: ERROR
+            UCC_TLS: ^sharp
       all:
         autoload: direct
       projections:
