@@ -44,7 +44,7 @@ then
     # git -C ${prefix}/spack branch
     # hostname --fqdn
 
-# NOTE: This option is for CI/CD
+# NOTE: Setting symlinks can be avoided by using this option:
 elif [ "$#" -eq 1 ]
 then
     CONFIG="${CONFIGDIR}/${1}"
