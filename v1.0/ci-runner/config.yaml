@@ -1,0 +1,13 @@
+config:
+  install_tree:
+    # Completely ignoring higher-level configuration options is supported with the :: notation for keys ...
+    root:: $spack/../release
+  # Available in v0.20.0
+  source_cache: $spack/../sourcecache
+  # Available in v0.20.0
+  environments_root: $spack/../environments
+  # Increasing from 1 minute to 10 minutes to allow for concurrent builds
+  # to wait longer for .spack-db lock rather than exiting early.
+  db_lock_timeout: 600
+  # Runner images are constrained, so we increase the package install concurrency, but not enough to overload the node
+  concurrent_packages: 2
