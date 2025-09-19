@@ -1,1 +1,5 @@
-../../common/ci-runner/upstreams.yaml
+upstreams:
+  upstream:
+    # Assumes that from the runners point of view, the volume mount
+    # point for the containerised upstream install_tree is /opt/upstream-v1.0 (for spack v1.0)
+    install_tree: /opt/upstream-v1.0
