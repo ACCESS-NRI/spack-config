@@ -1,8 +1,7 @@
 packages:
-  all:
-    providers:
-      # Completely ignoring higher-level configuration options is supported with the :: notation for keys ...
-      mpi:: [openmpi]
+  # Completely ignoring lower-precedence configuration options is supported with the :: notation for keys
+  mpi::
+    require: openmpi
   cmake:
     externals:
     - spec: cmake@3.24.2

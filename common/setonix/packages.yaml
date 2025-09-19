@@ -1,4 +1,7 @@
 packages:
+  # Completely ignoring lower-precedence configuration options is supported with the :: notation for keys
+  mpi::
+    require: mpich
   perl:
     externals:
     - spec: perl@5.26.1
