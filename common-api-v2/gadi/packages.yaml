@@ -437,9 +437,15 @@ packages:
           cxx: /usr/bin/g++
           fortran: /usr/bin/gfortran
   intel-oneapi-compilers:
+    # 2024.0.2 -> /apps/intel-tools/.packages/2024.0.1/compiler/2024.0
+    # 2024.2.0 -> /apps/intel-tools/.packages/2024.2.0/compiler/2024.2
+    # 2024.2.1 -> /apps/intel-tools/.packages/2024.2.1/compiler/2024.2
+    # 2025.0.4 -> /apps/intel-tools/.packages/2025.0.1/compiler/2025.0
+    # 2025.1.1 -> /apps/intel-tools/.packages/2025.1.3/compiler/2025.1
+    # 2025.2.0 -> /apps/intel-tools/.packages/2025.2.0.575/compiler/2025.2
     externals:
     - spec: intel-oneapi-compilers@2025.2.0
-      prefix: /apps/intel-tools
+      prefix: /apps/intel-tools/.packages/2025.2.0.575
       modules: [intel-compiler-llvm/2025.2.0]
       extra_attributes:
         compilers:
@@ -447,117 +453,13 @@ packages:
           cxx: /apps/intel-tools/wrappers/icpx
           fortran: /apps/intel-tools/wrappers/ifx
     - spec: intel-oneapi-compilers@2025.1.1
-      prefix: /apps/intel-tools
+      prefix: /apps/intel-tools/.packages/2025.1.3
       modules: [intel-compiler-llvm/2025.1.1]
       extra_attributes:
         compilers:
           c: /apps/intel-tools/wrappers/icx
           cxx: /apps/intel-tools/wrappers/icpx
           fortran: /apps/intel-tools/wrappers/ifx
-    - spec: intel-oneapi-compilers@2025.0.4
-      prefix: /apps/intel-tools
-      modules: [intel-compiler-llvm/2025.0.4]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-tools/wrappers/icx
-          cxx: /apps/intel-tools/wrappers/icpx
-          fortran: /apps/intel-tools/wrappers/ifx
-    - spec: intel-oneapi-compilers@2024.2.1
-      prefix: /apps/intel-tools
-      modules: [intel-compiler-llvm/2024.2.1]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-tools/wrappers/icx
-          cxx: /apps/intel-tools/wrappers/icpx
-          fortran: /apps/intel-tools/wrappers/ifx
-    - spec: intel-oneapi-compilers@2024.2.0
-      prefix: /apps/intel-tools
-      modules: [intel-compiler-llvm/2024.2.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-tools/wrappers/icx
-          cxx: /apps/intel-tools/wrappers/icpx
-          fortran: /apps/intel-tools/wrappers/ifx
-    - spec: intel-oneapi-compilers@2024.0.2
-      prefix: /apps/intel-tools
-      modules: [intel-compiler-llvm/2024.0.2]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-tools/wrappers/icx
-          cxx: /apps/intel-tools/wrappers/icpx
-          fortran: /apps/intel-tools/wrappers/ifx
-    - spec: intel-oneapi-compilers@2023.2.0
-      prefix: /apps/intel-ct
-      modules: [intel-compiler-llvm/2023.2.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icx
-          cxx: /apps/intel-ct/wrapper/icpx
-          fortran: /apps/intel-ct/wrapper/ifx
-    - spec: intel-oneapi-compilers@2023.0.0
-      prefix: /apps/intel-ct
-      modules: [intel-compiler-llvm/2023.0.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icx
-          cxx: /apps/intel-ct/wrapper/icpx
-          fortran: /apps/intel-ct/wrapper/ifx
-    - spec: intel-oneapi-compilers@2022.2.0
-      prefix: /apps/intel-ct
-      modules: [intel-compiler-llvm/2022.2.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icx
-          cxx: /apps/intel-ct/wrapper/icpx
-          fortran: /apps/intel-ct/wrapper/ifx
-    - spec: intel-oneapi-compilers@2022.1.0
-      prefix: /apps/intel-ct
-      modules: [intel-compiler-llvm/2022.1.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icx
-          cxx: /apps/intel-ct/wrapper/icpx
-          fortran: /apps/intel-ct/wrapper/ifx
-    - spec: intel-oneapi-compilers@2022.0.0
-      prefix: /apps/intel-ct
-      modules: [intel-compiler-llvm/2022.0.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icx
-          cxx: /apps/intel-ct/wrapper/icpx
-          fortran: /apps/intel-ct/wrapper/ifx
-    - spec: intel-oneapi-compilers@2021.4.0
-      prefix: /apps/intel-ct
-      modules: [intel-compiler/2021.4.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icx
-          cxx: /apps/intel-ct/wrapper/icpx
-          fortran: /apps/intel-ct/wrapper/ifx
-    - spec: intel-oneapi-compilers@2021.3.0
-      prefix: /apps/intel-ct
-      modules: [intel-compiler/2021.3.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icx
-          cxx: /apps/intel-ct/wrapper/icpx
-          fortran: /apps/intel-ct/wrapper/ifx
-    - spec: intel-oneapi-compilers@2021.2.0
-      prefix: /apps/intel-ct
-      modules: [intel-compiler/2021.2.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icx
-          cxx: /apps/intel-ct/wrapper/icpx
-          fortran: /apps/intel-ct/wrapper/ifx
-    - spec: intel-oneapi-compilers@2021.1
-      prefix: /apps/intel-ct
-      modules: [intel-compiler/2021.1.1]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icx
-          cxx: /apps/intel-ct/wrapper/icpx
-          fortran: /apps/intel-ct/wrapper/ifx
   intel-oneapi-compilers-classic:
     externals:
     - spec: intel-oneapi-compilers-classic@2021.13.1
