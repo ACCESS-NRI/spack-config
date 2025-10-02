@@ -1,4 +1,4 @@
-# Completely ignoring higher-level configuration options is supported with the :: notation for keys ...
+# Completely ignoring lower-precedence configuration options is supported with the :: notation for keys
 compilers::
 - compiler:
     spec: clang@=17.0.6

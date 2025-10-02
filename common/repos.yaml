@@ -1,4 +1,4 @@
-# Completely ignoring higher-level configuration options is supported with the :: notation for keys ...
+# Completely ignoring lower-precedence configuration options is supported with the :: notation for keys
 repos::
 - $spack/../spack-packages
 - $spack/var/spack/repos/builtin
