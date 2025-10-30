@@ -1,6 +1,8 @@
 # Completely ignoring lower-precedence configuration options is supported with the :: notation for keys
 repos::
-  access_spack_packages: $spack/../spack-packages/spack_repo/access/nri
+  access_spack_packages:
+    git: https://github.com/ACCESS-NRI/access-spack-packages.git
+    branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
     # FMS: add 2025 releases and limit io deprecation variant (#790)
