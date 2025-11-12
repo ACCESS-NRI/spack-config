@@ -5,5 +5,5 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    # FMS: add 2025 releases and limit io deprecation variant (#790)
-    commit: 60517d15b003ddb01214ae1f949fc1180cb68049
+    # fckit: add depends_on("c") (#2379)
+    commit: 459c715dccfcedadeaab6f364ccee62c8a3e0eaa
