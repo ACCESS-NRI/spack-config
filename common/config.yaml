@@ -9,3 +9,7 @@ config:
   # Increasing from 1 minute to 10 minutes to allow for concurrent builds
   # to wait longer for .spack-db lock rather than exiting early.
   db_lock_timeout: 600
+  # Set deprecated to true, to avoid:
+  # Error: Version requirement 3.31.6 on cmake for cmake cannot match any
+  #        known version from package.py or externals
+  deprecated: true
