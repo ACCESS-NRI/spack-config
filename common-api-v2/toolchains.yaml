@@ -1,0 +1,22 @@
+toolchains:
+  access_gcc:
+  - spec: '%c=gcc'
+    when: '%c'
+  - spec: '%cxx=gcc'
+    when: '%cxx'
+  - spec: '%fortran=gcc'
+    when: '%fortran'
+  access_intel:
+  - spec: '%c=intel-oneapi-compilers-classic'
+    when: '%c'
+  - spec: '%cxx=intel-oneapi-compilers-classic'
+    when: '%cxx'
+  - spec: '%fortran=intel-oneapi-compilers-classic'
+    when: '%fortran'
+  access_oneapi:
+  - spec: '%c=intel-oneapi-compilers'
+    when: '%c'
+  - spec: '%cxx=intel-oneapi-compilers'
+    when: '%cxx'
+  - spec: '%fortran=intel-oneapi-compilers'
+    when: '%fortran'
