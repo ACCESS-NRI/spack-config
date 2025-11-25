@@ -5,7 +5,5 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    # fckit: add depends_on("c") (#2379)
-    # commit: 459c715dccfcedadeaab6f364ccee62c8a3e0eaa
-    # Commit before the one that breaks the intel classic compiler
-    commit: 8ed34337e15d759890b68682d704aa55dd243537
+    # fix intel_oneapi_compilers_classic@:2021.10 (#2176)
+    commit: 39aeb9dbcc13b6a53e40c77b672c397e1f4c93ec
