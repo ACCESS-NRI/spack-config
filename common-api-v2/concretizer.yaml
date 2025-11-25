@@ -2,4 +2,4 @@ concretizer:
   targets:
     # Completely ignoring lower-precedence configuration options is supported with the :: notation for keys
     granularity:: generic
-    compiler_mixing: false
+  compiler_mixing: false
