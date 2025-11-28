@@ -1,0 +1,48 @@
+packages:
+  # Completely ignoring lower-precedence configuration options is supported with the :: notation for keys
+  mpi::
+    require: openmpi
+  cmake:
+    externals:
+    - spec: cmake@3.31.8
+      prefix: /opt/nesi/zen3/CMake/3.31.8
+      modules: [CMake/3.31.8]
+    buildable: false
+  openmpi:
+    externals:
+    - spec: openmpi@4.1.5 %gcc@12.3.0
+      prefix: /opt/nesi/zen3/OpenMPI/4.1.5-GCC-12.3.0
+      modules: [OpenMPI/4.1.5-GCC-12.3.0]
+    - spec: openmpi@4.1.5
+      prefix: /opt/nesi/zen3/OpenMPI/4.1.5-intel-compilers-2023.2.1/
+      modules: [OpenMPI/4.1.5-intel-compilers-2023.2.1]
+      extra_attributes:
+        environment:
+          prepend_path:
+            CMAKE_PREFIX_PATH: /opt/nesi/zen3/OpenMPI/4.1.5-intel-compilers-2023.2.1/include
+    buildable: false
+  perl:
+    externals:
+    - spec: perl@5.32.1
+      prefix: /usr
+    buildable: false
+  gcc:
+    externals:
+    - spec: gcc@12.3.0 languages:='c,c++,fortran'
+      prefix: /opt/nesi/CS400_centos7_bdw/GCCcore/12.3.0
+      modules: [gcc/12.3.0]
+      extra_attributes:
+        compilers:
+          c: /opt/nesi/CS400_centos7_bdw/GCCcore/12.3.0/bin/gcc
+          cxx: /opt/nesi/CS400_centos7_bdw/GCCcore/12.3.0/bin/g++
+          fortran: /opt/nesi/CS400_centos7_bdw/GCCcore/12.3.0/bin/gfortran
+#  intel-oneapi-compilers-classic:
+#    externals:
+#    - spec: intel-oneapi-compilers-classic@2021.10.0
+#      prefix: /opt/nesi/CS400_centos7_bdw/intel-compilers/2023.2.1/compiler/2023.2.1/linux
+#      modules: [intel-compiler/2023.2.1]
+#      extra_attributes:
+#        compilers:
+#          c: /opt/nesi/CS400_centos7_bdw/intel-compilers/2023.2.1/compiler/2023.2.1/linux/bin/intel64/icc
+#          cxx: /opt/nesi/CS400_centos7_bdw/intel-compilers/2023.2.1/compiler/2023.2.1/linux/bin/intel64/icpc
+#          fortran: /opt/nesi/CS400_centos7_bdw/intel-compilers/2023.2.1/compiler/2023.2.1/linux/bin/intel64/ifort
