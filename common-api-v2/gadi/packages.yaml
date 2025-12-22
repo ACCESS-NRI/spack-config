@@ -12,13 +12,7 @@ packages:
   openmpi:
     # https://spack.readthedocs.io/en/latest/configuration.html#environment-modifications
     externals:
-    - spec: openmpi@4.0.1 %gcc
-      prefix: /apps/openmpi/4.0.1
-      modules: [openmpi/4.0.1]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.1/include/GNU
+    # ACCESS-ESM1.5 & ACCESS-OM2
     - spec: openmpi@4.0.2 %gcc
       prefix: /apps/openmpi/4.0.2
       modules: [openmpi/4.0.2]
@@ -26,34 +20,6 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.0.2/include/GNU
-    - spec: openmpi@4.0.3 %gcc
-      prefix: /apps/openmpi/4.0.3
-      modules: [openmpi/4.0.3]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.3/include/GNU
-    - spec: openmpi@4.0.4 %gcc
-      prefix: /apps/openmpi/4.0.4
-      modules: [openmpi/4.0.4]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.4/include/GNU
-    - spec: openmpi@4.0.5 %gcc
-      prefix: /apps/openmpi/4.0.5
-      modules: [openmpi/4.0.5]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.5/include/GNU
-    - spec: openmpi@4.0.6 %gcc
-      prefix: /apps/openmpi/4.0.6
-      modules: [openmpi/4.0.6]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.6/include/GNU
     - spec: openmpi@4.0.7 %gcc
       prefix: /apps/openmpi/4.0.7
       modules: [openmpi/4.0.7]
@@ -61,41 +27,6 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.0.7/include/GNU
-    - spec: openmpi@4.1.0 %gcc
-      prefix: /apps/openmpi/4.1.0
-      modules: [openmpi/4.1.0]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.0/include/GNU
-    - spec: openmpi@4.1.1 %gcc
-      prefix: /apps/openmpi/4.1.1
-      modules: [openmpi/4.1.1]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.1/include/GNU
-    - spec: openmpi@4.1.2 %gcc
-      prefix: /apps/openmpi/4.1.2
-      modules: [openmpi/4.1.2]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.2/include/GNU
-    - spec: openmpi@4.1.3 %gcc
-      prefix: /apps/openmpi/4.1.3
-      modules: [openmpi/4.1.3]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.3/include/GNU
-    - spec: openmpi@4.1.4 %gcc
-      prefix: /apps/openmpi/4.1.4
-      modules: [openmpi/4.1.4]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.4/include/GNU
     - spec: openmpi@4.1.5 %gcc
       prefix: /apps/openmpi/4.1.5
       modules: [openmpi/4.1.5]
@@ -124,13 +55,7 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/5.0.8/include/GNU
-    - spec: openmpi@4.0.1 %intel
-      prefix: /apps/openmpi/4.0.1
-      modules: [openmpi/4.0.1]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.1/include/Intel
+    # ACCESS-ESM1.5 & ACCESS-OM2
     - spec: openmpi@4.0.2 %intel
       prefix: /apps/openmpi/4.0.2
       modules: [openmpi/4.0.2]
@@ -138,34 +63,6 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.0.2/include/Intel
-    - spec: openmpi@4.0.3 %intel
-      prefix: /apps/openmpi/4.0.3
-      modules: [openmpi/4.0.3]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.3/include/Intel
-    - spec: openmpi@4.0.4 %intel
-      prefix: /apps/openmpi/4.0.4
-      modules: [openmpi/4.0.4]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.4/include/Intel
-    - spec: openmpi@4.0.5 %intel
-      prefix: /apps/openmpi/4.0.5
-      modules: [openmpi/4.0.5]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.5/include/Intel
-    - spec: openmpi@4.0.6 %intel
-      prefix: /apps/openmpi/4.0.6
-      modules: [openmpi/4.0.6]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.6/include/Intel
     - spec: openmpi@4.0.7 %intel
       prefix: /apps/openmpi/4.0.7
       modules: [openmpi/4.0.7]
@@ -173,41 +70,6 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.0.7/include/Intel
-    - spec: openmpi@4.1.0 %intel
-      prefix: /apps/openmpi/4.1.0
-      modules: [openmpi/4.1.0]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.0/include/Intel
-    - spec: openmpi@4.1.1 %intel
-      prefix: /apps/openmpi/4.1.1
-      modules: [openmpi/4.1.1]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.1/include/Intel
-    - spec: openmpi@4.1.2 %intel
-      prefix: /apps/openmpi/4.1.2
-      modules: [openmpi/4.1.2]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.2/include/Intel
-    - spec: openmpi@4.1.3 %intel
-      prefix: /apps/openmpi/4.1.3
-      modules: [openmpi/4.1.3]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.3/include/Intel
-    - spec: openmpi@4.1.4 %intel
-      prefix: /apps/openmpi/4.1.4
-      modules: [openmpi/4.1.4]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.4/include/Intel
     - spec: openmpi@4.1.5 %intel
       prefix: /apps/openmpi/4.1.5
       modules: [openmpi/4.1.5]
@@ -236,13 +98,7 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/5.0.8/include/Intel
-    - spec: openmpi@4.0.1 %oneapi
-      prefix: /apps/openmpi/4.0.1
-      modules: [openmpi/4.0.1]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.1/include/Intel
+    # ACCESS-ESM1.5 & ACCESS-OM2
     - spec: openmpi@4.0.2 %oneapi
       prefix: /apps/openmpi/4.0.2
       modules: [openmpi/4.0.2]
@@ -250,34 +106,6 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.0.2/include/Intel
-    - spec: openmpi@4.0.3 %oneapi
-      prefix: /apps/openmpi/4.0.3
-      modules: [openmpi/4.0.3]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.3/include/Intel
-    - spec: openmpi@4.0.4 %oneapi
-      prefix: /apps/openmpi/4.0.4
-      modules: [openmpi/4.0.4]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.4/include/Intel
-    - spec: openmpi@4.0.5 %oneapi
-      prefix: /apps/openmpi/4.0.5
-      modules: [openmpi/4.0.5]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.5/include/Intel
-    - spec: openmpi@4.0.6 %oneapi
-      prefix: /apps/openmpi/4.0.6
-      modules: [openmpi/4.0.6]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.6/include/Intel
     - spec: openmpi@4.0.7 %oneapi
       prefix: /apps/openmpi/4.0.7
       modules: [openmpi/4.0.7]
@@ -285,41 +113,6 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.0.7/include/Intel
-    - spec: openmpi@4.1.0 %oneapi
-      prefix: /apps/openmpi/4.1.0
-      modules: [openmpi/4.1.0]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.0/include/Intel
-    - spec: openmpi@4.1.1 %oneapi
-      prefix: /apps/openmpi/4.1.1
-      modules: [openmpi/4.1.1]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.1/include/Intel
-    - spec: openmpi@4.1.2 %oneapi
-      prefix: /apps/openmpi/4.1.2
-      modules: [openmpi/4.1.2]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.2/include/Intel
-    - spec: openmpi@4.1.3 %oneapi
-      prefix: /apps/openmpi/4.1.3
-      modules: [openmpi/4.1.3]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.3/include/Intel
-    - spec: openmpi@4.1.4 %oneapi
-      prefix: /apps/openmpi/4.1.4
-      modules: [openmpi/4.1.4]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.4/include/Intel
     - spec: openmpi@4.1.5 %oneapi
       prefix: /apps/openmpi/4.1.5
       modules: [openmpi/4.1.5]
@@ -389,14 +182,6 @@ packages:
           c: /apps/gcc/14.2.0/wrappers/gcc
           cxx: /apps/gcc/14.2.0/wrappers/g++
           fortran: /apps/gcc/14.2.0/wrappers/gfortran
-    - spec: gcc@14.1.0 languages:='c,c++,fortran'
-      prefix: /apps/gcc/14.1.0/wrappers
-      modules: [gcc/14.1.0]
-      extra_attributes:
-        compilers:
-          c: /apps/gcc/14.1.0/wrappers/gcc
-          cxx: /apps/gcc/14.1.0/wrappers/g++
-          fortran: /apps/gcc/14.1.0/wrappers/gfortran
     - spec: gcc@13.2.0 languages:='c,c++,fortran'
       prefix: /apps/gcc/13.2.0/wrappers
       modules: [gcc/13.2.0]
@@ -405,30 +190,6 @@ packages:
           c: /apps/gcc/13.2.0/wrappers/gcc
           cxx: /apps/gcc/13.2.0/wrappers/g++
           fortran: /apps/gcc/13.2.0/wrappers/gfortran
-    - spec: gcc@12.2.0 languages:='c,c++,fortran'
-      prefix: /apps/gcc/12.2.0/wrappers
-      modules: [gcc/12.2.0]
-      extra_attributes:
-        compilers:
-          c: /apps/gcc/12.2.0/wrappers/gcc
-          cxx: /apps/gcc/12.2.0/wrappers/g++
-          fortran: /apps/gcc/12.2.0/wrappers/gfortran
-    - spec: gcc@11.1.0 languages:='c,c++,fortran'
-      prefix: /apps/gcc/11.1.0/wrappers
-      modules: [gcc/11.1.0]
-      extra_attributes:
-        compilers:
-          c: /apps/gcc/11.1.0/wrappers/gcc
-          cxx: /apps/gcc/11.1.0/wrappers/g++
-          fortran: /apps/gcc/11.1.0/wrappers/gfortran
-    - spec: gcc@10.3.0 languages:='c,c++,fortran'
-      prefix: /apps/gcc/10.3.0/wrappers
-      modules: [gcc/10.3.0]
-      extra_attributes:
-        compilers:
-          c: /apps/gcc/10.3.0/wrappers/gcc
-          cxx: /apps/gcc/10.3.0/wrappers/g++
-          fortran: /apps/gcc/10.3.0/wrappers/gfortran
     - spec: gcc@8.5.0 languages:='c,c++,fortran'
       prefix: /usr
       extra_attributes:
@@ -467,16 +228,6 @@ packages:
       extra_attributes:
         compilers:
           fortran: /apps/intel-tools/intel-compiler-llvm/2024.2.1/bin/ifort
-    - spec: intel-oneapi-compilers-classic@2021.13.0
-      prefix: /apps/intel-tools/intel-compiler-llvm/2024.2.0
-      extra_attributes:
-        compilers:
-          fortran: /apps/intel-tools/intel-compiler-llvm/2024.2.0/bin/ifort
-    - spec: intel-oneapi-compilers-classic@2021.11.1
-      prefix: /apps/intel-tools/intel-compiler-llvm/2024.0.2
-      extra_attributes:
-        compilers:
-          fortran: /apps/intel-tools/intel-compiler-llvm/2024.0.2/bin/ifort
     - spec: intel-oneapi-compilers-classic@2021.10.0
       prefix: /apps/intel-ct/wrapper
       modules: [intel-compiler/2021.10.0]
@@ -485,102 +236,7 @@ packages:
           c: /apps/intel-ct/wrapper/icc
           cxx: /apps/intel-ct/wrapper/icpc
           fortran: /apps/intel-ct/wrapper/ifort
-    - spec: intel-oneapi-compilers-classic@2021.8.0
-      prefix: /apps/intel-ct/wrapper
-      modules: [intel-compiler/2021.8.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icc
-          cxx: /apps/intel-ct/wrapper/icpc
-          fortran: /apps/intel-ct/wrapper/ifort
-    - spec: intel-oneapi-compilers-classic@2021.7.0
-      prefix: /apps/intel-ct/wrapper
-      modules: [intel-compiler/2021.7.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icc
-          cxx: /apps/intel-ct/wrapper/icpc
-          fortran: /apps/intel-ct/wrapper/ifort
-    - spec: intel-oneapi-compilers-classic@2021.6.0
-      prefix: /apps/intel-ct/wrapper
-      modules: [intel-compiler/2021.6.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icc
-          cxx: /apps/intel-ct/wrapper/icpc
-          fortran: /apps/intel-ct/wrapper/ifort
-    - spec: intel-oneapi-compilers-classic@2021.5.0
-      prefix: /apps/intel-ct/wrapper
-      modules: [intel-compiler/2021.5.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icc
-          cxx: /apps/intel-ct/wrapper/icpc
-          fortran: /apps/intel-ct/wrapper/ifort
-    - spec: intel-oneapi-compilers-classic@2021.4.0
-      prefix: /apps/intel-ct/wrapper
-      modules: [intel-compiler/2021.4.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icc
-          cxx: /apps/intel-ct/wrapper/icpc
-          fortran: /apps/intel-ct/wrapper/ifort
-    - spec: intel-oneapi-compilers-classic@2021.3.0
-      prefix: /apps/intel-ct/wrapper
-      modules: [intel-compiler/2021.3.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icc
-          cxx: /apps/intel-ct/wrapper/icpc
-          fortran: /apps/intel-ct/wrapper/ifort
-    - spec: intel-oneapi-compilers-classic@2021.2.0
-      prefix: /apps/intel-ct/wrapper
-      modules: [intel-compiler/2021.2.0]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icc
-          cxx: /apps/intel-ct/wrapper/icpc
-          fortran: /apps/intel-ct/wrapper/ifort
-    - spec: intel-oneapi-compilers-classic@2021.1
-      prefix: /apps/intel-ct/wrapper
-      modules: [intel-compiler/2021.1.1]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icc
-          cxx: /apps/intel-ct/wrapper/icpc
-          fortran: /apps/intel-ct/wrapper/ifort
-    - spec: intel-oneapi-compilers-classic@19.1.3.304
-      prefix: /apps/intel-ct/wrapper
-      modules: [intel-compiler/2020.3.304]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icc
-          cxx: /apps/intel-ct/wrapper/icpc
-          fortran: /apps/intel-ct/wrapper/ifort
-    - spec: intel-oneapi-compilers-classic@19.1.2.254
-      prefix: /apps/intel-ct/wrapper
-      modules: [intel-compiler/2020.2.254]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icc
-          cxx: /apps/intel-ct/wrapper/icpc
-          fortran: /apps/intel-ct/wrapper/ifort
-    - spec: intel-oneapi-compilers-classic@19.1.1.217
-      prefix: /apps/intel-ct/wrapper
-      modules: [intel-compiler/2020.1.217]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icc
-          cxx: /apps/intel-ct/wrapper/icpc
-          fortran: /apps/intel-ct/wrapper/ifort
-    - spec: intel-oneapi-compilers-classic@19.1.0.166
-      prefix: /apps/intel-ct/wrapper
-      modules: [intel-compiler/2020.0.166]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icc
-          cxx: /apps/intel-ct/wrapper/icpc
-          fortran: /apps/intel-ct/wrapper/ifort
+    # ACCESS-OM2
     - spec: intel-oneapi-compilers-classic@19.0.5.281
       prefix: /apps/intel-ct/wrapper
       modules: [intel-compiler/2019.5.281]
@@ -589,14 +245,7 @@ packages:
           c: /apps/intel-ct/wrapper/icc
           cxx: /apps/intel-ct/wrapper/icpc
           fortran: /apps/intel-ct/wrapper/ifort
-    - spec: intel-oneapi-compilers-classic@19.0.4.243
-      prefix: /apps/intel-ct/wrapper
-      modules: [intel-compiler/2019.4.243]
-      extra_attributes:
-        compilers:
-          c: /apps/intel-ct/wrapper/icc
-          cxx: /apps/intel-ct/wrapper/icpc
-          fortran: /apps/intel-ct/wrapper/ifort
+    # ACCESS-ESM1.5
     - spec: intel-oneapi-compilers-classic@19.0.3.199
       prefix: /apps/intel-ct/wrapper
       modules: [intel-compiler/2019.3.199]
