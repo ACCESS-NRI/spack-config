@@ -1,0 +1,162 @@
+name: CI
+on:
+  pull_request:
+    paths:
+      # Changes to the linked file aren't reflected in symlinks, so we trigger only on common* changes
+      # and determine what files are symlinked to it later.
+      - common*
+  workflow_dispatch:
+    inputs:
+      spack-config-directories-to-test:
+        description: 'Space-separated list of spack-config directories to test against - recommended v*/ci-[runner|upstream]'
+        required: true
+        type: string
+        default: v1.1/ci-runner
+      builtin-spack-packages-ref:
+        description: 'spack/spack-packages ref to use'
+        required: true
+        type: string
+      access-spack-packages-ref:
+        description: 'access-nri/access-spack-packages ref to use'
+        required: true
+        type: string
+      spack-config-ref:
+        description: 'spack-config ref to use'
+        required: true
+        type: string
+      spack-ref:
+        description: 'spack ref to use'
+        required: true
+        type: string
+jobs:
+  setup-ci:
+    name: Setup CI
+    runs-on: ubuntu-latest
+    env:
+      # Note, this needs to be updated in line with refs in the CI job below
+      BUILD_CI_WORKFLOW_VERSION: v3
+    outputs:
+      # Matrices used in CI job
+      manifest-matrix: ${{ steps.setup-manifests.outputs.matrix }}
+      config-matrix: ${{ steps.setup-config.outputs.matrix }}
+      # Global defaults for CI job
+      builtin-spack-packages-ref: ${{ inputs.builtin-spack-packages-ref }}
+      access-spack-packages-ref: ${{ inputs.access-spack-packages-ref || steps.defaults.outputs.access-spack-packages-ref }}
+      spack-config-ref: ${{ inputs.spack-config-ref || github.event.pull_request.head.sha }}
+      spack-ref: ${{ inputs.spack-ref || steps.defaults.outputs.spack-ref }}
+    steps:
+      - name: Checkout spack-config
+        uses: actions/checkout@v4
+
+      - name: PR - Get files changed
+        id: set-matrix-pr
+        if: github.event_name == 'pull_request'
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c  # v46.0.5
+        with:
+          # Since files in v* are symlinks, we can't check if they're changed, so we need to do more processing in steps.set-matrix-pr-symlinks
+          # to find which config directories need to be tested.
+          files: common*/**.yaml
+
+      - name: PR - Get config directories of symlinks to files changed
+        id: set-matrix-pr-symlinks
+        if: github.event_name == 'pull_request'
+        # Given changed files in a common* dir, find which files symlink to it and return the unique v*/ci-* directories for testing
+        run: |
+          all_symlinked_config_dirs=""
+
+          for changed_file in ${{ steps.set-matrix-pr.outputs.all_changed_files }}; do
+            symlinked_config_dirs=$(find -L . -samefile $changed_file -path './v*/ci-*' -printf '%h\n')
+            echo "For $changed_file, directories that have files symlinking it are: $symlinked_config_dirs"
+            all_symlinked_config_dirs+="$symlinked_config_dirs"$'\n'
+          done
+
+          echo "All symlinked config directories: $all_symlinked_config_dirs"
+          echo "symlinked-config-dirs=$(sort -u <<< "$all_symlinked_config_dirs" | tr '\n' ' ') >> $GITHUB_OUTPUT
+
+      - name: Dispatch - Get config directory to test
+        id: set-matrix-dispatch
+        if: github.event_name == 'workflow_dispatch'
+        # TODO: Determine if we should have an ALL input that should be handled here
+        run: |
+          echo "dirs=${{ inputs.spack-config-directories-to-test }}" >> $GITHUB_OUTPUT
+
+      - name: Setup Manifest Matrix
+        id: setup-manifests
+        # To simplify the matrix creation logic later on, we are splitting the matrices into a manifest file name one,
+        # and a configuration one - they will be applied in combination in the CI job.
+        # TODO: Alternatively if using inputs.spack-manifest-repository, pick and validate that the files exist in that repo
+        run: |
+          manifests=$(find .github/build-ci/manifests -printf '%p,')
+          echo "$manifests"
+          echo "matrix=[${manifests%,}]" >> $GITHUB_OUTPUT
+
+      - name: Setup Spack Version Branch Matrix
+        id: setup-config
+        # Create a matrix of configuration directories (eg. v1.1) and whether to test upstream (GitHub-hosted) or runner (self-hosted) images
+        run: |
+          json_entries=""
+
+          for config_dir in ${{ steps.set-matrix-pr-symlinks.outputs.symlinked-config-dirs || steps.set-matrix-dispatch.outputs.dirs }}; do
+            self_hosted=$(grep -q upstream <<< "$config_dir" && echo true || echo false)
+            spack_branch_version=$(cut -d'/' -f1 <<< "$config_dir")
+            json_entry=$(printf '{"self-hosted": "%s", "spack-version-branch": "%s"}' "$self_hosted" "$spack_branch_version")
+            json_entries+="${json_entry},"
+          done
+
+          echo "$json_entries"
+          echo "matrix=[${json_entries%,}]" >> $GITHUB_OUTPUT
+
+      - name: Checkout build-ci
+        uses: actions/checkout@v4
+        with:
+          repository: access-nri/build-ci
+          ref: ${{ env.BUILD_CI_WORKFLOW_VERSION }}
+
+      - name: Get default refs from build-ci workflow
+        id: defaults
+        # GitHub does not treat empty-string inputs as eligible for substitution with a default
+        # Since we are supporting both workflow_dispatch and pull_request triggers, the entrypoint inputs need to be filled in
+        # So we are getting the default values from the workflow file itself, and passing them back into the workflow
+        # builtin-spack-packages-ref does not need this as the input handles the empty string default.
+        run: |
+          default_spack_ref=$(yq '.on.workflow_call.inputs."spack-ref".default' .github/workflows/ci.yml)
+          default_access_spack_packages_ref=$(yq '.on.workflow_call.inputs."access-spack-packages-ref".default' .github/workflows/ci.yml)
+
+          echo "Default refs from ${{ env.BUILD_CI_WORKFLOW_VERSION }}: spack-ref=$default_spack_ref, access-spack-packages=$default_access_spack_packages_ref"
+
+          echo "spack-ref=$default_spack_ref" >> $GITHUB_OUTPUT
+          echo "access-spack-packages-ref=$default_access_spack_packages_ref" >> $GITHUB_OUTPUT
+
+  ci:
+    name: CI
+    needs:
+      - setup-ci
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        manifest: ${{ fromJson(needs.setup-ci.outputs.manifest-matrix) }}
+        config: ${{ fromJson(needs.setup-ci.outputs.config-matrix) }}
+        # Respectively of the form:
+        #   [ .github/build-ci/manifests/some.spack.yaml, ...]
+        # And:
+        #   [{
+        #     self-hosted: true,
+        #     spack-version-branch: v1.1
+        #   }, ...]
+    uses: access-nri/build-ci/.github/workflows/ci.yml@v3
+    with:
+      # TODO: What files do we test? All of them (potentially many if a file is symlinked across multiple spack version dirs?)
+      # Or, a representative subset informed via inputs.spack-manifest-data-pairs?
+      # TODO: Add once ACCESS-NRI/build-ci#264 is merged
+      # spack-manifest-repository: access-nri/access-spack-packages
+      # spack-manifest-repository-ref: api-v2
+      spack-manifest-path: ${{ matrix.manifest }}
+      builtin-spack-packages-ref: ${{ needs.setup-ci.outputs.builtin-spack-packages-ref }}
+      access-spack-packages-ref: ${{ needs.setup-ci.outputs.access-spack-packages-ref }}
+      spack-config-ref: ${{ needs.setup-ci.outputs.spack-config-ref }}
+      spack-ref: ${{ needs.setup-ci.outputs.spack-ref }}
+      container-image-version: :rocky-${{ matrix.config.spack-version-branch }}
+      run-self-hosted: ${{ matrix.config.self-hosted == 'true' && true || false }}
+    secrets:
+      spack-install-command-pat: ${{ secrets.SPACK_INSTALL_COMMAND_PAT }}
