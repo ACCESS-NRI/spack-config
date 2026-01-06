@@ -2,9 +2,11 @@ name: CI
 on:
   pull_request:
     paths:
-      # Changes to the linked file aren't reflected in symlinks, so we trigger only on common* changes
+      # Changes to the linked file aren't reflected in symlinks, so we trigger on common* changes
       # and determine what files are symlinked to it later.
-      - common*
+      - common*/**
+      # But we can still determine when symlinks are added!
+      - v*/ci-*/**
   workflow_dispatch:
     inputs:
       spack-config-directories-to-test:
@@ -53,21 +55,32 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c  # v46.0.5
         with:
-          # Since files in v* are symlinks, we can't check if they're changed, so we need to do more processing in steps.set-matrix-pr-symlinks
-          # to find which config directories need to be tested.
-          files: common*/**.yaml
+          # Since files in v* are symlinks, we can't check if they're changed, only added,
+          # so we need to do more processing in steps.set-matrix-pr-symlinks to find which config directories need to be tested.
+          files_yaml: |
+            common_changes:
+              - common*/**.yaml
+            new_symlinks:
+              - v*/ci-*/**.yaml
 
       - name: PR - Get config directories of symlinks to files changed
         id: set-matrix-pr-symlinks
         if: github.event_name == 'pull_request'
         # Given changed files in a common* dir, find which files symlink to it and return the unique v*/ci-* directories for testing
+        # Alternatively, if a new symlink is added, just return the unique v*/ci-* directory for testing
         run: |
           all_symlinked_config_dirs=""
 
-          for changed_file in ${{ steps.set-matrix-pr.outputs.all_changed_files }}; do
+          for changed_file in ${{ steps.set-matrix-pr.outputs.common_changes_all_changed_files }}; do
             symlinked_config_dirs=$(find -L . -samefile $changed_file -path './v*/ci-*' -printf '%h\n')
             echo "For $changed_file, directories that have files symlinking it are: $symlinked_config_dirs"
             all_symlinked_config_dirs+="$symlinked_config_dirs"$'\n'
+          done
+
+          for changed_file in ${{ steps.set-matrix-pr.outputs.new_symlinks_all_changed_files }}; do
+            symlinked_config_dir=$(dirname "$changed_file")
+            echo "New symlinked file $changed_file is in directory: $symlinked_config_dir"
+            all_symlinked_config_dirs+="$symlinked_config_dir"$'\n'
           done
 
           echo "All symlinked config directories: $all_symlinked_config_dirs"
