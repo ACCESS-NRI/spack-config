@@ -97,7 +97,6 @@ jobs:
         id: setup-manifests
         # To simplify the matrix creation logic later on, we are splitting the matrices into a manifest file name one,
         # and a configuration one - they will be applied in combination in the CI job.
-        # TODO: Alternatively if using inputs.spack-manifest-repository, pick and validate that the files exist in that repo
         run: |
           manifests=$(find .github/build-ci/manifests -printf '%p,')
           echo "$manifests"
@@ -159,12 +158,8 @@ jobs:
         #   }, ...]
     uses: access-nri/build-ci/.github/workflows/ci.yml@v3
     with:
-      # TODO: What files do we test? All of them (potentially many if a file is symlinked across multiple spack version dirs?)
-      # Or, a representative subset informed via inputs.spack-manifest-data-pairs?
-      # TODO: Add once ACCESS-NRI/build-ci#264 is merged
-      # spack-manifest-repository: access-nri/access-spack-packages
-      # spack-manifest-repository-ref: api-v2
       spack-manifest-path: ${{ matrix.manifest }}
+      spack-manifest-data-path: .github/build-ci/data/standard.json
       builtin-spack-packages-ref: ${{ needs.setup-ci.outputs.builtin-spack-packages-ref }}
       access-spack-packages-ref: ${{ needs.setup-ci.outputs.access-spack-packages-ref }}
       spack-config-ref: ${{ needs.setup-ci.outputs.spack-config-ref }}
