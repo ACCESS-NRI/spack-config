@@ -1,0 +1,17 @@
+spack:
+  specs:
+  - access-test-component
+  packages:
+    python:
+      require:
+      - '@3.11.14'
+    intel-oneapi-compilers-classic:
+      require:
+      - '{{ intel_compiler_ver }}'
+    all:
+      require:
+      - '%access_intel'
+      - 'target={{ target }}'
+  concretizer:
+    unify: false
+  view: false
