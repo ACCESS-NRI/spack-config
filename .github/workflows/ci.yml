@@ -72,7 +72,10 @@ jobs:
           all_symlinked_config_dirs=""
 
           for changed_file in ${{ steps.set-matrix-pr.outputs.common_changes_all_changed_files }}; do
-            symlinked_config_dirs=$(find -L . -samefile $changed_file -path './v*/ci-*' -printf '%h\n')
+            # Note on the below command - we pipe the filenames to `dirname` instead of using `-printf %h` because
+            # the latter doesn't strip the starting `./`. Later steps need the path to not contain `./`.
+
+            symlinked_config_dirs=$(find -L . -samefile $changed_file -path './v*/ci-*' -printf '%P\n' | xargs dirname)
             echo "For $changed_file, directories that have files symlinking it are: $symlinked_config_dirs"
             all_symlinked_config_dirs+="$symlinked_config_dirs"$'\n'
           done
@@ -84,7 +87,7 @@ jobs:
           done
 
           echo "All symlinked config directories: $all_symlinked_config_dirs"
-          echo "symlinked-config-dirs=$(sort -u <<< "$all_symlinked_config_dirs" | tr '\n' ' ') >> $GITHUB_OUTPUT
+          echo "symlinked-config-dirs=$(sort -u <<< "$all_symlinked_config_dirs" | tr '\n' ' ')" >> $GITHUB_OUTPUT
 
       - name: Dispatch - Get config directory to test
         id: set-matrix-dispatch
@@ -98,7 +101,7 @@ jobs:
         # To simplify the matrix creation logic later on, we are splitting the matrices into a manifest file name one,
         # and a configuration one - they will be applied in combination in the CI job.
         run: |
-          manifests=$(find .github/build-ci/manifests -printf '%p,')
+          manifests=$(find .github/build-ci/manifests -type f -printf '"%p",')
           echo "$manifests"
           echo "matrix=[${manifests%,}]" >> $GITHUB_OUTPUT
 
@@ -110,7 +113,10 @@ jobs:
 
           for config_dir in ${{ steps.set-matrix-pr-symlinks.outputs.symlinked-config-dirs || steps.set-matrix-dispatch.outputs.dirs }}; do
             self_hosted=$(grep -q upstream <<< "$config_dir" && echo true || echo false)
+
+            # For directories of the form 'v1.1/blah', this will give `v1.1`
             spack_branch_version=$(cut -d'/' -f1 <<< "$config_dir")
+
             json_entry=$(printf '{"self-hosted": "%s", "spack-version-branch": "%s"}' "$self_hosted" "$spack_branch_version")
             json_entries+="${json_entry},"
           done
