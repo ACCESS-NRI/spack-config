@@ -182,6 +182,15 @@ packages:
           c: /apps/gcc/14.2.0/wrappers/gcc
           cxx: /apps/gcc/14.2.0/wrappers/g++
           fortran: /apps/gcc/14.2.0/wrappers/gfortran
+    # https://github.com/ACCESS-NRI/system-tools
+    - spec: gcc@14.1.0 languages:='c,c++,fortran'
+      prefix: /apps/gcc/14.1.0/wrappers
+      modules: [gcc/14.1.0]
+      extra_attributes:
+        compilers:
+          c: /apps/gcc/14.1.0/wrappers/gcc
+          cxx: /apps/gcc/14.1.0/wrappers/g++
+          fortran: /apps/gcc/14.1.0/wrappers/gfortran
     - spec: gcc@13.2.0 languages:='c,c++,fortran'
       prefix: /apps/gcc/13.2.0/wrappers
       modules: [gcc/13.2.0]
