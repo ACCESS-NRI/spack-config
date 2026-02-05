@@ -271,3 +271,5 @@ packages:
         compilers:
           c: /usr/bin/clang
           cxx: /usr/bin/clang++
+  all:
+    target: [x86_64]

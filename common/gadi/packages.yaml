@@ -371,3 +371,5 @@ packages:
           set:
             NCI_PYTHONX_AS_PYTHON: python3
     buildable: false
+  all:
+    target: [x86_64]
