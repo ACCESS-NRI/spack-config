@@ -13,42 +13,42 @@ packages:
     # https://spack.readthedocs.io/en/latest/configuration.html#environment-modifications
     externals:
     # ACCESS-ESM1.5 & ACCESS-OM2
-    - spec: openmpi@4.0.2 %gcc
+    - spec: openmpi@4.0.2 %gcc@13.2.0
       prefix: /apps/openmpi/4.0.2
       modules: [openmpi/4.0.2]
       extra_attributes:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.0.2/include/GNU
-    - spec: openmpi@4.0.7 %gcc
+    - spec: openmpi@4.0.7 %gcc@13.2.0
       prefix: /apps/openmpi/4.0.7
       modules: [openmpi/4.0.7]
       extra_attributes:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.0.7/include/GNU
-    - spec: openmpi@4.1.5 %gcc
+    - spec: openmpi@4.1.5 %gcc@13.2.0
       prefix: /apps/openmpi/4.1.5
       modules: [openmpi/4.1.5]
       extra_attributes:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.1.5/include/GNU
-    - spec: openmpi@4.1.7 %gcc
+    - spec: openmpi@4.1.7 %gcc@13.2.0
       prefix: /apps/openmpi/4.1.7
       modules: [openmpi/4.1.7]
       extra_attributes:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.1.7/include/GNU
-    - spec: openmpi@5.0.5 %gcc
+    - spec: openmpi@5.0.5 %gcc@13.2.0
       prefix: /apps/openmpi/5.0.5
       modules: [openmpi/5.0.5]
       extra_attributes:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/5.0.5/include/GNU
-    - spec: openmpi@5.0.8 %gcc
+    - spec: openmpi@5.0.8 %gcc@13.2.0
       prefix: /apps/openmpi/5.0.8
       modules: [openmpi/5.0.8]
       extra_attributes:
@@ -56,85 +56,42 @@ packages:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/5.0.8/include/GNU
     # ACCESS-ESM1.5 & ACCESS-OM2
-    - spec: openmpi@4.0.2 %intel
+    - spec: openmpi@4.0.2
       prefix: /apps/openmpi/4.0.2
       modules: [openmpi/4.0.2]
       extra_attributes:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.0.2/include/Intel
-    - spec: openmpi@4.0.7 %intel
+    - spec: openmpi@4.0.7
       prefix: /apps/openmpi/4.0.7
       modules: [openmpi/4.0.7]
       extra_attributes:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.0.7/include/Intel
-    - spec: openmpi@4.1.5 %intel
+    - spec: openmpi@4.1.5
       prefix: /apps/openmpi/4.1.5
       modules: [openmpi/4.1.5]
       extra_attributes:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.1.5/include/Intel
-    - spec: openmpi@4.1.7 %intel
+    - spec: openmpi@4.1.7
       prefix: /apps/openmpi/4.1.7
       modules: [openmpi/4.1.7]
       extra_attributes:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/4.1.7/include/Intel
-    - spec: openmpi@5.0.5 %intel
+    - spec: openmpi@5.0.5
       prefix: /apps/openmpi/5.0.5
       modules: [openmpi/5.0.5]
       extra_attributes:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/5.0.5/include/Intel
-    - spec: openmpi@5.0.8 %intel
-      prefix: /apps/openmpi/5.0.8
-      modules: [openmpi/5.0.8]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/5.0.8/include/Intel
-    # ACCESS-ESM1.5 & ACCESS-OM2
-    - spec: openmpi@4.0.2 %oneapi
-      prefix: /apps/openmpi/4.0.2
-      modules: [openmpi/4.0.2]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.2/include/Intel
-    - spec: openmpi@4.0.7 %oneapi
-      prefix: /apps/openmpi/4.0.7
-      modules: [openmpi/4.0.7]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.0.7/include/Intel
-    - spec: openmpi@4.1.5 %oneapi
-      prefix: /apps/openmpi/4.1.5
-      modules: [openmpi/4.1.5]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.5/include/Intel
-    - spec: openmpi@4.1.7 %oneapi
-      prefix: /apps/openmpi/4.1.7
-      modules: [openmpi/4.1.7]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/4.1.7/include/Intel
-    - spec: openmpi@5.0.5 %oneapi
-      prefix: /apps/openmpi/5.0.5
-      modules: [openmpi/5.0.5]
-      extra_attributes:
-        environment:
-          prepend_path:
-            CMAKE_PREFIX_PATH: /apps/openmpi/5.0.5/include/Intel
-    - spec: openmpi@5.0.8 %oneapi
+    - spec: openmpi@5.0.8
       prefix: /apps/openmpi/5.0.8
       modules: [openmpi/5.0.8]
       extra_attributes:
