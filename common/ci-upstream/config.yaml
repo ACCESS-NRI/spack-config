@@ -6,5 +6,11 @@ config:
   source_cache: $spack/../sourcecache
   # Available in v0.20.0
   environments_root: $spack/../environments
-  # Set deprecated to true, to avoid concretization failures for deprecated packages on newer versions of spack
+  # Increasing from 1 minute to 10 minutes to allow for concurrent builds
+  # to wait longer for .spack-db lock rather than exiting early.
+  db_lock_timeout: 600
+  # Set deprecated to true, to avoid:
+  # Error: Version requirement 3.31.6 on cmake for cmake cannot match any
+  #        known version from package.py or externals
+  # As well as other concretization failures for deprecated packages on newer versions of spack
   deprecated: true
