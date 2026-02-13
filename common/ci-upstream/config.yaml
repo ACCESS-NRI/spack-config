@@ -6,3 +6,5 @@ config:
   source_cache: $spack/../sourcecache
   # Available in v0.20.0
   environments_root: $spack/../environments
+  # Set deprecated to true, to avoid concretization failures for deprecated packages on newer versions of spack
+  deprecated: true
