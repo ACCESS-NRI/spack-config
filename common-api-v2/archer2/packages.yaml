@@ -1,0 +1,25 @@
+packages:
+  # Completely ignoring lower-precedence configuration options is supported with the :: notation for keys
+  mpi::
+    require: cray-mpich
+  perl:
+    externals:
+    - spec: perl@5.26.1~cpanm+opcode+open+shared+threads
+      prefix: /usr
+    buildable: false
+  gcc:
+    externals:
+    - spec: gcc@=11.2.0
+      extra_attributes:
+        compilers:
+          c: cc
+          cxx: CC
+          fortran: ftn
+      modules:
+      - cpe/23.09
+      - PrgEnv-gnu
+      - gcc/11.2.0
+      - xpmem
+      - libfabric
+      - craype-x86-rome
+      - craype-network-ofi
