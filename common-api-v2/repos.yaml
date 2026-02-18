@@ -5,5 +5,5 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    # fix intel_oneapi_compilers_classic@:2021.10 (#2176)
-    commit: 39aeb9dbcc13b6a53e40c77b672c397e1f4c93ec
+    # gnu packages: bump (#3390)
+    commit: 383e969358c951abe17623696083e6f862c4488e
