@@ -5,5 +5,5 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    #py-marisa-trie: new package (#2525)
-    commit: c7aa16a4ce71d006cdba369d55bbb25b2bcb513b
+    # cuda: add v13.1.0 and v13.1.1 (#3028)
+    commit: 122a2b98e149d96451afc49bc617f348b1bd1ad2
