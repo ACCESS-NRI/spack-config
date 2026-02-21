@@ -5,5 +5,5 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    # ci: disable tutorial pipeline (#3249)
-    commit: c3ce4ac100fe65aa817a09e4fe000d427e1ce155
+    # gcc: default to +binutils (#3106)
+    commit: e6d347de0cecc04e9837ae1e90a42f99354501b7
