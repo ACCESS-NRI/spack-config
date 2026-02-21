@@ -5,5 +5,5 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    # arborx: update kokkos+cuda constraints for kokkos@5: (#3160)
-    commit: 20e154335c937b75bd1bb2de51f19bdeaa8cac6a
+    # py-lightning: add v2.6.1 (#3208)
+    commit: 1b4b57133d5d13426742da4b9cde18a16ab03c60
