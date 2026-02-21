@@ -5,5 +5,5 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    # gnu packages: bump (#3390)
-    commit: 383e969358c951abe17623696083e6f862c4488e
+    # py-numpy: fix amdblis detection logic (#3225)
+    commit: 376b03ab367310e41a20df2bb7addf13e2259722
