@@ -5,5 +5,5 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    # cuda: add v13.1.0 and v13.1.1 (#3028)
-    commit: 122a2b98e149d96451afc49bc617f348b1bd1ad2
+    # arborx: update kokkos+cuda constraints for kokkos@5: (#3160)
+    commit: 20e154335c937b75bd1bb2de51f19bdeaa8cac6a
