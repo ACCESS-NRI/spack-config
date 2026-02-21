@@ -5,5 +5,5 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    # binutils: --enable-deterministic-archives (#3232)
-    commit: 82ee7a8b11550f25f16e1ee6cbbd2cc671bcf90d
+    # opus: add v1.6.1 (#3240)
+    commit: 5f2e07f938d0ddc12330be7d97f67c5adfc8ceed
