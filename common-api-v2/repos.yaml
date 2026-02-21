@@ -5,5 +5,5 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    # opus: add v1.6.1 (#3240)
-    commit: 5f2e07f938d0ddc12330be7d97f67c5adfc8ceed
+    # ci: disable tutorial pipeline (#3249)
+    commit: c3ce4ac100fe65aa817a09e4fe000d427e1ce155
