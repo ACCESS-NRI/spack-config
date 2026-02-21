@@ -5,4 +5,5 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    commit: dbad3f77d2219175f8cc158a4fae879af6e27824
+    #py-marisa-trie: new package (#2525)
+    commit: c7aa16a4ce71d006cdba369d55bbb25b2bcb513b
