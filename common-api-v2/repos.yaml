@@ -5,5 +5,5 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    # py-lightning: add v2.6.1 (#3208)
-    commit: 1b4b57133d5d13426742da4b9cde18a16ab03c60
+    # binutils: --enable-deterministic-archives (#3232)
+    commit: 82ee7a8b11550f25f16e1ee6cbbd2cc671bcf90d
