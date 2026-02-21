@@ -5,5 +5,4 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    # py-numpy: fix amdblis detection logic (#3225)
-    commit: 376b03ab367310e41a20df2bb7addf13e2259722
+    commit: dbad3f77d2219175f8cc158a4fae879af6e27824
