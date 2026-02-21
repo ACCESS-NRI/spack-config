@@ -5,5 +5,5 @@ repos::
     branch: api-v2
   builtin:
     git: https://github.com/spack/spack-packages.git
-    # gcc: default to +binutils (#3106)
-    commit: e6d347de0cecc04e9837ae1e90a42f99354501b7
+    # mathic: add v1.2 (#3241)
+    commit: b771730907200d9be25d06785a46adfed87900c1
