@@ -3,6 +3,7 @@ repos::
   access_spack_packages:
     git: https://github.com/ACCESS-NRI/access-spack-packages.git
     branch: api-v2
+    destination: $spack/../access-spack-packages
   builtin:
     git: https://github.com/spack/spack-packages.git
     # gnu packages: bump (#3390)
