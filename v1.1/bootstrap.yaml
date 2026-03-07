@@ -1,0 +1,4 @@
+bootstrap:
+  # Root directory for bootstrapping work. The software bootstrapped
+  # by Spack is installed in a "store" subfolder of this root directory
+  root:: $spack/../bootstrap
