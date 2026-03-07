@@ -1,0 +1,2 @@
+bootstrap:
+  root:: /g/data/$PROJECT/$USER/spack/1.1/bootstrap

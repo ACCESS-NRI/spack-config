@@ -1,0 +1,7 @@
+config:
+  install_tree:
+    # Completely ignoring lower-precedence configuration options is supported with the :: notation for keys
+    root:: /g/data/$PROJECT/$USER/spack/1.1/release
+  source_cache: /g/data/$PROJECT/$USER/spack/1.1/sourcecache
+  environments_root: /g/data/$PROJECT/$USER/spack/1.1/environments
+  misc_cache: /g/data/$PROJECT/$USER/spack/1.1/cache
