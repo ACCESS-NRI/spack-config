@@ -1,7 +1,4 @@
 packages:
-  # Completely ignoring lower-precedence configuration options is supported with the :: notation for keys
-  mpi::
-    require: openmpi
   openmpi:
     # https://spack.readthedocs.io/en/latest/configuration.html#environment-modifications
     externals:
@@ -91,11 +88,6 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/5.0.8/include/Intel
-    buildable: false
-  perl:
-    externals:
-    - spec: perl@5.26.3
-      prefix: /usr
     buildable: false
   python:
     externals:
@@ -212,5 +204,3 @@ packages:
         compilers:
           c: /usr/bin/clang
           cxx: /usr/bin/clang++
-  all:
-    target: [x86_64]
