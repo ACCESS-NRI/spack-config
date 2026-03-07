@@ -1,12 +1,10 @@
-# This is not an executable! Do not enable execute permissions.
+# This is NOT an executable! Do not enable execute permissions.
 # You need to be running a bash shell, then execute: . spack-enable.bash
 # This file is from https://github.com/ACCESS-NRI/spack-config/
 
 # Required layout:
 # $prefix/spack
 # $prefix/${CONFIGDIR}
-# $prefix/spack-packages
-# $prefix/release (defined in $prefix/${CONFIGDIR}/*/*/config.yaml)
 
 # https://spack-tutorial.readthedocs.io/en/latest/tutorial_configuration.html#yaml-format
 #
@@ -18,59 +16,42 @@
 # adding that section, Spack replaces what was in that section with the new
 # value.
 
+# https://spack.readthedocs.io/en/latest/configuration.html#configuration-scopes
+# $ spack config scopes -p
+# Scope           Path
+# command_line
+# spack           $spack/etc/spack/
+# user            $HOME/spack/1.1
+# site            $spack/etc/spack/site/
+# system          $spack/../spack-config/<version>/<site>/
+# defaults        $spack/etc/spack/defaults/
+# defaults:linux  $spack/etc/spack/defaults/linux/
+# defaults:base   $spack/etc/spack/defaults/base/
+# _builtin
+
+
 # TODO: Decide on the version of Python that we approve.
 #export SPACK_PYTHON=
 
 CONFIGDIR="$(realpath $(dirname $BASH_SOURCE))"
 
-# NOTE: A lot of ugly code below to avoid setting variables in the
-#       user's environment. e.g. Avoid defining functions.
+# NOTE: Try to avoid setting variables in the user's environment.
 
 if [ "$#" -eq 0 ]
 then
-    # Disable ~/.spack because we have seen compiler misconfiguration by
-    # users. This also disables /etc/spack .
-    export SPACK_DISABLE_LOCAL_CONFIG="true"
-
     # Setting SPACK_DISABLE_LOCAL_CONFIG ignores the following:
     # export SPACK_SYSTEM_CONFIG_PATH=""
     # export SPACK_USER_CONFIG_PATH=""
     unset SPACK_SYSTEM_CONFIG_PATH
-    unset SPACK_USER_CONFIG_PATH
-    echo "Using configuration in spack/etc/spack"
-
-    # NOTE: If using symlinks is undesirable, the following commands can
-    #       be used to construct the name of the relevant config directory.
-    # git -C ${prefix}/spack branch
-    # hostname --fqdn
-
-# NOTE: Setting symlinks can be avoided by using this option:
-elif [ "$#" -eq 1 ]
-then
-    CONFIG="${CONFIGDIR}/${1}"
-    if [ ! -d "${CONFIG}" ]
-    then
-        echo "Directory ${CONFIG} does not exist."
-        unset CONFIG
-        unset CONFIGDIR
-        return 1
-    fi
-
-    echo "Using configuration in ${CONFIG}"
-    unset SPACK_DISABLE_LOCAL_CONFIG
-    export SPACK_USER_CONFIG_PATH="${CONFIG}"
-    export SPACK_SYSTEM_CONFIG_PATH="${CONFIG}"
-    unset CONFIG
-
+    export SPACK_USER_CONFIG_PATH="${HOME}/spack/1.1"
 else
-    echo "Usage: . ${PROGNAME} [<spack-version>/{ci,gadi}]"
+    echo "Usage: . ${PROGNAME}"
     unset CONFIGDIR
     return 1
 fi
 
-
 # https://github.com/spack/spack/issues/27704
-export SPACK_USER_CACHE_PATH="${CONFIGDIR}/../"
+export SPACK_USER_CACHE_PATH="${HOME}/spack/1.1/cache"
 
 . ${CONFIGDIR}/../spack/share/spack/setup-env.sh
 unset CONFIGDIR
