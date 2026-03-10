@@ -6,5 +6,5 @@ repos:
     destination: $spack/../access-spack-packages
   builtin::
     git: https://github.com/spack/spack-packages.git
-    # gnu packages: bump (#3390)
-    commit: 383e969358c951abe17623696083e6f862c4488e
+    # gcc: use link type dep for binutils (#3671)
+    commit: 2f02a99ec9dfd5dceb9bd91abc392edabd9ba963
