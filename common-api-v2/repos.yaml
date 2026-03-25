@@ -8,3 +8,4 @@ repos:
     git: https://github.com/spack/spack-packages.git
     # gcc: use link type dep for binutils (#3671)
     commit: 2f02a99ec9dfd5dceb9bd91abc392edabd9ba963
+    destination: $spack/../spack-packages
