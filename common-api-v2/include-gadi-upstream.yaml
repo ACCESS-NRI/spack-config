@@ -1,0 +1,5 @@
+include:
+  - name: "site"
+    path: "$spack/../spack-config/v1.1/gadi"
+    path: "$spack/../spack-config/v1.1"
+    when: '"gadi.nci.org.au" in hostname'
