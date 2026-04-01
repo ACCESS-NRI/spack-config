@@ -1,0 +1,28 @@
+include:
+  # user configuration scope
+  - name: "user"
+    path_override_env_var: SPACK_USER_CONFIG_PATH
+    path: "~/.spack"
+    optional: true
+    prefer_modify: true
+    when: '"SPACK_DISABLE_LOCAL_CONFIG" not in env'
+
+  # site configuration scope
+  - name: "site"
+    path: "$spack/../spack-config/v1.1/gadi-downstream"
+    when: '"gadi.nci.org.au" in hostname and "SPACK_UPSTREAM_CONFIG" not in env'
+
+  # site configuration scope
+  - name: "site"
+    path: "$spack/../spack-config/v1.1/ci-downstream"
+    when: '"gadi.nci.org.au" not in hostname and "SPACK_UPSTREAM_CONFIG" not in env'
+
+  # On Gadi, both user and admin need this:
+  - name: "gadi-packages"
+    path: "$spack/../spack-config/v1.1/gadi/packages.yaml"
+    when: '"gadi.nci.org.au" in hostname'
+
+  # system configuration scope
+  - name: "system"
+    path_override_env_var: SPACK_SYSTEM_CONFIG_PATH
+    path: "$spack/../spack-config/v1.1"

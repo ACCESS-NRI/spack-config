@@ -1,0 +1,5 @@
+upstreams:
+  release:
+    install_tree: /g/data/vk83/apps/spack/1.1/release
+  prerelease:
+    install_tree: /g/data/vk83/prerelease/apps/spack/1.1/release

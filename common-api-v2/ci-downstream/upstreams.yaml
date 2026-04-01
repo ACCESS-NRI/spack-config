@@ -1,0 +1,3 @@
+upstreams:
+  release:
+    install_tree: /opt/release
