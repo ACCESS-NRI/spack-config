@@ -10,12 +10,12 @@ include:
   # site configuration scope
   - name: "site"
     path: "$spack/../spack-config/v1.1/gadi-downstream"
-    when: '"gadi.nci.org.au" in hostname'
+    when: '"gadi.nci.org.au" in hostname and "ACCESS_SPACK_ADMIN" not in env'
 
   # site configuration scope
   - name: "site"
     path: "$spack/../spack-config/v1.1/ci-downstream"
-    when: '"gadi.nci.org.au" not in hostname'
+    when: '"gadi.nci.org.au" not in hostname and "ACCESS_SPACK_ADMIN" not in env'
 
   # On Gadi, both user and admin need this:
   - name: "gadi-packages"
