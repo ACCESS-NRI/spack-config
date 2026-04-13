@@ -1,0 +1,6 @@
+modules:
+  default:
+    roots:
+      # For binaries under the restricted/ukmo/release directory, we also want to
+      # generate modulefiles under restricted/ukmo/release/modules.
+      tcl: $spack/../restricted/ukmo/release/modules
