@@ -1,0 +1,33 @@
+# Refer to https://spack.readthedocs.io/en/latest/module_file_support.html
+modules:
+  default:
+    enable:
+    - tcl
+    roots:
+      tcl: $spack/../release/modules
+      lmod: $spack/../release/lmod
+    tcl:
+      hash_length: 0
+      # https://spack.readthedocs.io/en/latest/module_file_support.html
+      # A common complaint about autoloading is the large number of modules
+      # that are visible to the user. Spack has a solution for this as
+      # well: hide_implicits: true. This ensures that only those packages
+      # you’ve explicitly installed are exposed by module avail, but still
+      # allows for autoloading of hidden dependencies. Lmod should support
+      # hiding implicits in general, while Environment Modules requires
+      # version 4.7 or higher.
+      # Gadi:
+      # $ module --version
+      # Modules Release 4.3.0 (2019-07-26)
+      # CI:
+      # $ module --version
+      # Modules Release 4.5.2 (2020-07-30)
+      # Looks like we need to use exclude_implicits because Gadi and CI has
+      # an old version of modules.
+      # https://github.com/spack/spack/issues/40940
+      exclude_implicits: true
+      # hide_implicits: true
+      all:
+        autoload: direct
+      projections:
+        all: '{name}/{version}-{hash:7}'

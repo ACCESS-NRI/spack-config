@@ -1,0 +1,7 @@
+config:
+  install_tree:
+    # Completely ignoring lower-precedence configuration options is supported with the :: notation for keys
+    root:: $spack/../runner/release
+  source_cache: $spack/../runner/sourcecache
+  environments_root: $spack/../runner/environments
+  misc_cache: $spack/../runner/cache
