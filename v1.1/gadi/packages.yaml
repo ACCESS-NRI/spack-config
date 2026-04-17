@@ -13,6 +13,9 @@ packages:
     buildable: false
   openmpi:
     # https://spack.readthedocs.io/en/latest/configuration.html#environment-modifications
+    # NOTE: The corresponding modules.yaml file has to be kept in-sync
+    #       with this section in order for the system modulefile to be
+    #       loaded.
     externals:
     # ACCESS-ESM1.5 & ACCESS-OM2
     - spec: openmpi@4.0.2 %gcc@13.2.0
