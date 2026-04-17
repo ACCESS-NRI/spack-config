@@ -1,0 +1,6 @@
+# Refer to https://spack.readthedocs.io/en/latest/module_file_support.html
+modules:
+  default:
+    tcl:
+      # https://spack.readthedocs.io/en/latest/module_file_support.html#exclude-or-include-specific-module-files
+      exclude: ["openmpi"]
