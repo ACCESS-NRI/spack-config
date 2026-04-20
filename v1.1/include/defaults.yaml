@@ -12,22 +12,22 @@ include:
     path: "$spack/../spack-user-config"
     optional: true
 
-  # site configuration scope
-  - name: "site"
+  # Gadi downstream configuration scope
+  - name: "access.nri.gadi.downstream"
     path: "$spack/../spack-config/v1.1/gadi/downstream"
     when: '"gadi.nci.org.au" in hostname and "ACCESS_SPACK_ADMIN" not in env'
 
-  # site configuration scope
-  - name: "site"
+  # CI downstream configuration scope
+  - name: "access.nri.ci.downstream"
     path: "$spack/../spack-config/v1.1/ci/downstream"
     when: '"gadi.nci.org.au" not in hostname and "ACCESS_SPACK_ADMIN" not in env'
 
-  # On Gadi, both user and admin need this:
-  - name: "gadi-packages"
-    path: "$spack/../spack-config/v1.1/gadi/packages.yaml"
+  # Gadi configuration scope
+  - name: "access.nri.gadi"
+    path: "$spack/../spack-config/v1.1/gadi"
     when: '"gadi.nci.org.au" in hostname'
 
-  # system configuration scope
+  # system configuration scope replaced by access.nri.defaults scope
   - name: "access.nri.defaults"
     path: "$spack/../spack-config/v1.1"
 
