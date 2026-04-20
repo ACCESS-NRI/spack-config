@@ -1,4 +1,0 @@
-# This file should be used for maintaining a Spack CI upstream instance by
-# a user with admin privileges. This file should be added to ~/.spack/ .
-include:
-- "$spack/../spack-config/v1.1"
