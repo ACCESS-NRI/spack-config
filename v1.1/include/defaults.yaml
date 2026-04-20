@@ -7,6 +7,23 @@ include:
   #   prefer_modify: true
   #   when: '"SPACK_DISABLE_LOCAL_CONFIG" not in env'
 
+  # downstream user configuration scope
+  - name: "access.nri.gadi.user"
+    path: "/g/data/$PROJECT/$USER/spack/1.1/spack-user-config"
+    optional: true
+    when: '"gadi.nci.org.au" in hostname and "ACCESS_SPACK_ADMIN" not in env'
+
+  # downstream user configuration scope
+  - name: "access.nri.ci.user"
+    path: "$spack/../runner/spack-user-config"
+    optional: true
+    when: '"gadi.nci.org.au" not in hostname and "ACCESS_SPACK_ADMIN" not in env'
+
+  # user configuration scope replaced by access.nri.user scope
+  - name: "access.nri.user"
+    path: "$spack/../spack-user-config"
+    optional: true
+
   # site configuration scope
   - name: "site"
     path: "$spack/../spack-config/v1.1/gadi/downstream"
