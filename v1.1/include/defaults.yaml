@@ -7,6 +7,11 @@ include:
   #   prefer_modify: true
   #   when: '"SPACK_DISABLE_LOCAL_CONFIG" not in env'
 
+  # user configuration scope replaced by access.nri.user scope
+  - name: "access.nri.user"
+    path: "$spack/../spack-user-config"
+    optional: true
+
   # site configuration scope
   - name: "site"
     path: "$spack/../spack-config/v1.1/gadi/downstream"

@@ -1,0 +1,4 @@
+include:
+  - name: "access.nri.user"
+    path: "$spack/../runner/spack-user-config"
+    optional: true

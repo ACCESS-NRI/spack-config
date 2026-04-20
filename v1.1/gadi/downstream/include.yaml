@@ -1,0 +1,4 @@
+include:
+  - name: "access.nri.user"
+    path: "/g/data/$PROJECT/$USER/spack/1.1/spack-user-config"
+    optional: true
