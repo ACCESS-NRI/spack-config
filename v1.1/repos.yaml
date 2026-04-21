@@ -6,6 +6,6 @@ repos:
     destination: $spack/../access-spack-packages
   builtin::
     git: https://github.com/spack/spack-packages.git
-    # gcc: use link type dep for binutils (#3671)
-    commit: 2f02a99ec9dfd5dceb9bd91abc392edabd9ba963
+    # mumps: fix compilation with oneAPI
+    commit: 7d252c0ddf0fca65f67775e38db4606bd47c8cc4
     destination: $spack/../spack-packages
