@@ -19,9 +19,9 @@ include:
     optional: true
     when: '"gadi.nci.org.au" not in hostname and "ACCESS_SPACK_ADMIN" not in env'
 
-  # user configuration scope replaced by access.nri.user scope
-  - name: "access.nri.user"
-    path: "$spack/../spack-user-config"
+  # user configuration scope replaced by access.nri.admin scope
+  - name: "access.nri.admin"
+    path: "$spack/../spack-admin-config"
     optional: true
 
   # Gadi downstream configuration scope
