@@ -7,6 +7,14 @@ include:
   #   prefer_modify: true
   #   when: '"SPACK_DISABLE_LOCAL_CONFIG" not in env'
 
+  # user configuration scope replaced by ACCESS-NRI user scopes
+  # (highest to lowest precedence):
+  # access.nri.gadi.user
+  # access.nri.ci.user
+  # access.nri.admin
+  # These scopes and rules must be separate and above the predefined scopes
+  # in order for Spack to override ACCESS-NRI's predefined scopes and rules.
+
   # downstream user configuration scope
   - name: "access.nri.gadi.user"
     path: "/g/data/$PROJECT/$USER/spack/1.1/spack-user-config"
@@ -19,7 +27,7 @@ include:
     optional: true
     when: '"gadi.nci.org.au" not in hostname and "ACCESS_SPACK_ADMIN" not in env'
 
-  # user configuration scope replaced by access.nri.admin scope
+  # access.nri.admin configuration scope
   - name: "access.nri.admin"
     path: "$spack/../spack-admin-config"
     optional: true
