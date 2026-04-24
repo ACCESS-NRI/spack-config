@@ -31,6 +31,7 @@ include:
   - name: "access.nri.admin"
     path: "$spack/../spack-admin-config"
     optional: true
+    when: '"ACCESS_SPACK_ADMIN" in env'
 
   # Gadi downstream configuration scope
   - name: "access.nri.gadi.downstream"
