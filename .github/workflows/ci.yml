@@ -46,19 +46,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: PR - Get files changed
-        id: files-changed
+        id: set-matrix-pr
         if: github.event_name == 'pull_request'
         uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c  # v46.0.5
         with:
+          dir_names: true
+          dir_names_max_depth: 1
+          dir_names_exclude_current_dir: true
+          files_separator: ' '
           files: |
             v**
             !v0.**
-
-      - name: PR - Get unique directories changed
-        id: set-matrix-pr
-        if: github.event_name == 'pull_request'
-        run: |
-          echo "dirs=$(echo '${{ steps.files-changed.outputs.changed_files }}' | xargs -n1 dirname | sort -u)" >> $GITHUB_OUTPUT
 
       - name: Dispatch - Get config directory to test
         id: set-matrix-dispatch
@@ -81,7 +79,7 @@ jobs:
         run: |
           json_entries=""
 
-          for config_dir in ${{ steps.set-matrix-pr.outputs.symlinked-config-dirs || steps.set-matrix-dispatch.outputs.dirs }}; do
+          for config_dir in ${{ steps.set-matrix-pr.outputs.all_changed_files || steps.set-matrix-dispatch.outputs.dirs }}; do
             # For directories of the form 'v1.1/blah', this will give `v1.1`
             spack_branch_version=$(cut -d'/' -f1 <<< "$config_dir")
 
