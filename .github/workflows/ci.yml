@@ -2,18 +2,18 @@ name: CI
 on:
   pull_request:
     paths:
-      # Changes to the linked file aren't reflected in symlinks, so we trigger on common* changes
-      # and determine what files are symlinked to it later.
-      - common*/**
-      # But we can still determine when symlinks are added!
-      - v*/ci-*/**
+      # We only want to run CI on spack versions that don't utilise symlinks (AKA pre-v1.1),
+      # in order to keep the CI simple. This means that the below pattern is essentially
+      # everthing in the v* directories, excluding the symlinked 0.* spack versions.
+      - 'v*'
+      - '!v0.*'
   workflow_dispatch:
     inputs:
       spack-config-directories-to-test:
-        description: 'Space-separated list of spack-config directories to test against - recommended v*/ci-[runner|upstream]'
+        description: 'Space-separated list of version-based spack-config directories to test against'
         required: true
         type: string
-        default: v1.1/ci-runner
+        default: v1.1
       builtin-spack-packages-ref:
         description: 'spack/spack-packages ref to use'
         required: true
@@ -51,48 +51,23 @@ jobs:
         uses: actions/checkout@v4
 
       - name: PR - Get files changed
-        id: set-matrix-pr
+        id: files-changed
         if: github.event_name == 'pull_request'
         uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c  # v46.0.5
         with:
-          # Since files in v* are symlinks, we can't check if they're changed, only added,
-          # so we need to do more processing in steps.set-matrix-pr-symlinks to find which config directories need to be tested.
           files_yaml: |
-            common_changes:
-              - common*/**.yaml
-            new_symlinks:
-              - v*/ci-*/**.yaml
+            v**
+            !v0.**
 
-      - name: PR - Get config directories of symlinks to files changed
-        id: set-matrix-pr-symlinks
+      - name: PR - Get unique directories changed
+        id: set-matrix-pr
         if: github.event_name == 'pull_request'
-        # Given changed files in a common* dir, find which files symlink to it and return the unique v*/ci-* directories for testing
-        # Alternatively, if a new symlink is added, just return the unique v*/ci-* directory for testing
         run: |
-          all_symlinked_config_dirs=""
-
-          for changed_file in ${{ steps.set-matrix-pr.outputs.common_changes_all_changed_files }}; do
-            # Note on the below command - we pipe the filenames to `dirname` instead of using `-printf %h` because
-            # the latter doesn't strip the starting `./`. Later steps need the path to not contain `./`.
-
-            symlinked_config_dirs=$(find -L . -samefile $changed_file -path './v*/ci-*' -printf '%P\n' | xargs dirname)
-            echo "For $changed_file, directories that have files symlinking it are: $symlinked_config_dirs"
-            all_symlinked_config_dirs+="$symlinked_config_dirs"$'\n'
-          done
-
-          for changed_file in ${{ steps.set-matrix-pr.outputs.new_symlinks_all_changed_files }}; do
-            symlinked_config_dir=$(dirname "$changed_file")
-            echo "New symlinked file $changed_file is in directory: $symlinked_config_dir"
-            all_symlinked_config_dirs+="$symlinked_config_dir"$'\n'
-          done
-
-          echo "All symlinked config directories: $all_symlinked_config_dirs"
-          echo "symlinked-config-dirs=$(sort -u <<< "$all_symlinked_config_dirs" | tr '\n' ' ')" >> $GITHUB_OUTPUT
+          echo "dirs=$(echo '${{ steps.files-changed.outputs.changed_files }}' | xargs -n1 dirname | sort -u)" >> $GITHUB_OUTPUT
 
       - name: Dispatch - Get config directory to test
         id: set-matrix-dispatch
         if: github.event_name == 'workflow_dispatch'
-        # TODO: Determine if we should have an ALL input that should be handled here
         run: |
           echo "dirs=${{ inputs.spack-config-directories-to-test }}" >> $GITHUB_OUTPUT
 
@@ -111,7 +86,7 @@ jobs:
         run: |
           json_entries=""
 
-          for config_dir in ${{ steps.set-matrix-pr-symlinks.outputs.symlinked-config-dirs || steps.set-matrix-dispatch.outputs.dirs }}; do
+          for config_dir in ${{ steps.set-matrix-pr.outputs.symlinked-config-dirs || steps.set-matrix-dispatch.outputs.dirs }}; do
             self_hosted=$(grep -q upstream <<< "$config_dir" && echo true || echo false)
 
             # For directories of the form 'v1.1/blah', this will give `v1.1`
