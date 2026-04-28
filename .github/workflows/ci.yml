@@ -45,18 +45,19 @@ jobs:
       - name: Checkout spack-config
         uses: actions/checkout@v4
 
-      - name: PR - Get files changed
+      - name: PR - Get dirs changed
         id: set-matrix-pr
         if: github.event_name == 'pull_request'
+        # FIXME: Doesn't work for some reason...
         uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c  # v46.0.5
         with:
-          dir_names: true
-          dir_names_max_depth: 1
-          dir_names_exclude_current_dir: true
-          files_separator: ' '
+          dir_names: true  # we want a list of spack configuration directories (eg. v1.1, v1.2)
+          dir_names_max_depth: 1  # and don't care about subdirectories
+          dir_names_exclude_current_dir: true  # or files changed in the root directory
+          # Below is an equivalent condition to on.pull_request.paths
           files: |
-            v**
-            !v0.**
+            v*/**
+            !v0.*/**
 
       - name: Dispatch - Get config directory to test
         id: set-matrix-dispatch
