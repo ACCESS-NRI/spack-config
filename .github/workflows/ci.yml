@@ -30,6 +30,11 @@ on:
         description: 'spack ref to use'
         required: true
         type: string
+      run-self-hosted:
+        description: 'Use self-hosted runners for the test'
+        required: true
+        default: true
+        type: boolean
 jobs:
   setup-ci:
     name: Setup CI
@@ -82,17 +87,15 @@ jobs:
 
       - name: Setup Spack Version Branch Matrix
         id: setup-config
-        # Create a matrix of configuration directories (eg. v1.1) and whether to test upstream (GitHub-hosted) or runner (self-hosted) images
+        # Create a matrix of configuration directories (eg. v1.1)
         run: |
           json_entries=""
 
           for config_dir in ${{ steps.set-matrix-pr.outputs.symlinked-config-dirs || steps.set-matrix-dispatch.outputs.dirs }}; do
-            self_hosted=$(grep -q upstream <<< "$config_dir" && echo true || echo false)
-
             # For directories of the form 'v1.1/blah', this will give `v1.1`
             spack_branch_version=$(cut -d'/' -f1 <<< "$config_dir")
 
-            json_entry=$(printf '{"self-hosted": "%s", "spack-version-branch": "%s"}' "$self_hosted" "$spack_branch_version")
+            json_entry=$(printf '{"spack-version-branch": "%s"}' "$spack_branch_version")
             json_entries+="${json_entry},"
           done
 
@@ -134,7 +137,6 @@ jobs:
         #   [ .github/build-ci/manifests/some.spack.yaml, ...]
         # And:
         #   [{
-        #     self-hosted: true,
         #     spack-version-branch: v1.1
         #   }, ...]
     uses: access-nri/build-ci/.github/workflows/ci.yml@v3
@@ -146,6 +148,7 @@ jobs:
       spack-config-ref: ${{ needs.setup-ci.outputs.spack-config-ref }}
       spack-ref: ${{ needs.setup-ci.outputs.spack-ref }}
       container-image-version: :rocky-${{ matrix.config.spack-version-branch }}
-      run-self-hosted: ${{ matrix.config.self-hosted == 'true' && true || false }}
+      # Workflow dispatch can switch depending on cluster/GitHub-hosted resourcing, otherwise run self-hosted
+      run-self-hosted: ${{ inputs.run-self-hosted || true }}
     secrets:
       spack-install-command-pat: ${{ secrets.SPACK_INSTALL_COMMAND_PAT }}
