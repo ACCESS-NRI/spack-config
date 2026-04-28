@@ -14,14 +14,6 @@ on:
         required: true
         type: string
         default: v1.1
-      builtin-spack-packages-ref:
-        description: 'spack/spack-packages ref to use'
-        required: true
-        type: string
-      access-spack-packages-ref:
-        description: 'access-nri/access-spack-packages ref to use'
-        required: true
-        type: string
       spack-config-ref:
         description: 'spack-config ref to use'
         required: true
@@ -47,8 +39,6 @@ jobs:
       manifest-matrix: ${{ steps.setup-manifests.outputs.matrix }}
       config-matrix: ${{ steps.setup-config.outputs.matrix }}
       # Global defaults for CI job
-      builtin-spack-packages-ref: ${{ inputs.builtin-spack-packages-ref }}
-      access-spack-packages-ref: ${{ inputs.access-spack-packages-ref || steps.defaults.outputs.access-spack-packages-ref }}
       spack-config-ref: ${{ inputs.spack-config-ref || github.event.pull_request.head.sha }}
       spack-ref: ${{ inputs.spack-ref || steps.defaults.outputs.spack-ref }}
     steps:
@@ -113,15 +103,12 @@ jobs:
         # GitHub does not treat empty-string inputs as eligible for substitution with a default
         # Since we are supporting both workflow_dispatch and pull_request triggers, the entrypoint inputs need to be filled in
         # So we are getting the default values from the workflow file itself, and passing them back into the workflow
-        # builtin-spack-packages-ref does not need this as the input handles the empty string default.
         run: |
           default_spack_ref=$(yq '.on.workflow_call.inputs."spack-ref".default' .github/workflows/ci.yml)
-          default_access_spack_packages_ref=$(yq '.on.workflow_call.inputs."access-spack-packages-ref".default' .github/workflows/ci.yml)
 
-          echo "Default refs from ${{ env.BUILD_CI_WORKFLOW_VERSION }}: spack-ref=$default_spack_ref, access-spack-packages=$default_access_spack_packages_ref"
+          echo "Default refs from ${{ env.BUILD_CI_WORKFLOW_VERSION }}: spack-ref=$default_spack_ref"
 
           echo "spack-ref=$default_spack_ref" >> $GITHUB_OUTPUT
-          echo "access-spack-packages-ref=$default_access_spack_packages_ref" >> $GITHUB_OUTPUT
 
   ci:
     name: CI
@@ -143,12 +130,10 @@ jobs:
     with:
       spack-manifest-path: ${{ matrix.manifest }}
       spack-manifest-data-path: .github/build-ci/data/standard.json
-      builtin-spack-packages-ref: ${{ needs.setup-ci.outputs.builtin-spack-packages-ref }}
-      access-spack-packages-ref: ${{ needs.setup-ci.outputs.access-spack-packages-ref }}
       spack-config-ref: ${{ needs.setup-ci.outputs.spack-config-ref }}
       spack-ref: ${{ needs.setup-ci.outputs.spack-ref }}
       container-image-version: :rocky-${{ matrix.config.spack-version-branch }}
-      # Workflow dispatch can switch depending on cluster/GitHub-hosted resourcing, otherwise run self-hosted
+      # Workflow dispatch can switch depending on cluster/GitHub resourcing, otherwise run self-hosted
       run-self-hosted: ${{ inputs.run-self-hosted || true }}
     secrets:
       spack-install-command-pat: ${{ secrets.SPACK_INSTALL_COMMAND_PAT }}
