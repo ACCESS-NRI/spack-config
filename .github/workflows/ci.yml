@@ -4,9 +4,9 @@ on:
     paths:
       # We only want to run CI on spack versions that don't utilise symlinks (AKA pre-v1.1),
       # in order to keep the CI simple. This means that the below pattern is essentially
-      # everthing in the v* directories, excluding the symlinked 0.* spack versions.
-      - 'v*'
-      - '!v0.*'
+      # everthing in the v* directories, excluding the symlinked v0.* spack versions.
+      - 'v**'
+      - '!v0.**'
   workflow_dispatch:
     inputs:
       spack-config-directories-to-test:
