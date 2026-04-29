@@ -34,7 +34,10 @@ jobs:
     env:
       # Note, this needs to be updated in line with refs in the CI job below
       BUILD_CI_WORKFLOW_VERSION: v3
+      # Which repository we get the manifest-to-test from
+      SPACK_MANIFEST_REPOSITORY: ACCESS-NRI/access-spack-packages
     outputs:
+      spack-manifest-repository: ${{ env.SPACK_MANIFEST_REPOSITORY }}
       # Matrices used in CI job
       manifest-matrix: ${{ steps.setup-manifests.outputs.matrix }}
       config-matrix: ${{ steps.setup-config.outputs.matrix }}
@@ -63,6 +66,11 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         run: |
           echo "dirs=${{ inputs.spack-config-directories-to-test }}" >> $GITHUB_OUTPUT
+
+      - name: Get Manifests from ${{ env.SPACK_MANIFEST_REPOSITORY }}
+        uses: actions/checkout@v6
+        with:
+          repository: ${{ env.SPACK_MANIFEST_REPOSITORY }}
 
       - name: Setup Manifest Matrix
         id: setup-manifests
@@ -126,8 +134,9 @@ jobs:
         #   }, ...]
     uses: access-nri/build-ci/.github/workflows/ci.yml@v3
     with:
+      spack-manifest-repository: ${{ needs.setup-ci.outputs.spack-manifest-repository }}
       spack-manifest-path: ${{ matrix.manifest }}
-      spack-manifest-data-path: .github/build-ci/data/standard.json
+      spack-manifest-data-path: .github/build-ci/data/standard_definitions.json
       spack-config-ref: ${{ needs.setup-ci.outputs.spack-config-ref }}
       spack-ref: ${{ needs.setup-ci.outputs.spack-ref }}
       container-image-version: :rocky-${{ matrix.config.spack-version-branch }}
