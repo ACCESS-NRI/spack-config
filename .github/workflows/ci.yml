@@ -39,8 +39,8 @@ jobs:
     outputs:
       spack-manifest-repository: ${{ env.SPACK_MANIFEST_REPOSITORY }}
       # Matrices used in CI job
-      manifest-matrix: ${{ steps.setup-manifests.outputs.matrix }}
-      config-matrix: ${{ steps.setup-config.outputs.matrix }}
+      manifest-matrix: ${{ steps.set-manifest-matrix.outputs.matrix }}
+      config-matrix: ${{ steps.set-config-matrix-pr.outputs.matrix || steps.set-config-matrix-dispatch.outputs.dirs }}
       # Global defaults for CI job
       spack-config-ref: ${{ inputs.spack-config-ref || github.event.pull_request.head.sha }}
       spack-ref: ${{ inputs.spack-ref || steps.defaults.outputs.spack-ref }}
@@ -49,54 +49,87 @@ jobs:
         uses: actions/checkout@v6
 
       - name: PR - Get dirs changed
-        id: set-matrix-pr
+        id: set-config-matrix-pr
         if: github.event_name == 'pull_request'
         uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96  # v47.0.6
         with:
           dir_names: true  # we want a list of spack configuration directories (eg. v1.1, v1.2)
           dir_names_max_depth: 1  # and don't care about subdirectories
           dir_names_exclude_current_dir: true  # or files changed in the root directory
+          matrix: true  # and format it in a way understandable to GitHub actions matrices
           # Below is an equivalent condition to on.pull_request.paths
           files: |
             v*/**
             !v0.*/**
 
       - name: Dispatch - Get config directory to test
-        id: set-matrix-dispatch
+        id: set-config-matrix-dispatch
         if: github.event_name == 'workflow_dispatch'
         run: |
           echo "dirs=${{ inputs.spack-config-directories-to-test }}" >> $GITHUB_OUTPUT
 
-      - name: Get Manifests from ${{ env.SPACK_MANIFEST_REPOSITORY }}
+      - name: Get ${{ env.SPACK_MANIFEST_REPOSITORY }}
         uses: actions/checkout@v6
         with:
           repository: ${{ env.SPACK_MANIFEST_REPOSITORY }}
 
+      # This access-spack-packages matrix creation logic was adapted from
+      # https://github.com/ACCESS-NRI/access-spack-packages/blob/51064dc720f49c49e9680c368201e26081d4fa3f/.github/workflows/ci.yml#L58-L145
+      # Since these manifests use the jinja template variable 'package', we need it here too.
+      # Future manifest repositories may not need to associate the spec with a jinja variable, in which case this can be removed.
+      - name: Get Manifests from ${{ env.SPACK_MANIFEST_REPOSITORY }}
+        id: access-spack-packages
+        env:
+          ACCESS_SPACK_PACKAGES_ROOT_DIR: spack_repo/access/nri/packages
+        run: |
+          pkgs=$(find ${{ env.ACCESS_SPACK_PACKAGES_ROOT_DIR }}/ -mindepth 1 -maxdepth 1 -type d -printf '%P ')
+
+          echo "Packages found in access-spack-packages: $pkgs"
+
+          echo "pkgs=$pkgs" >> $GITHUB_OUTPUT
+
       - name: Setup Manifest Matrix
-        id: setup-manifests
-        # To simplify the matrix creation logic later on, we are splitting the matrices into a manifest file name one,
-        # and a configuration one - they will be applied in combination in the CI job.
+        id: set-manifest-matrix
+        # Get all packages that will be tested, then
+        # Get file paths to manifests for each package, and a template, then finally
+        # Convert into a JSON array for the matrix, one of the form:
+        # [
+        #   {"template_value": "mom5", "filepath": ".github/build-ci/manifests/mom5/intel.spack.yaml.j2"},
+        #   {"template_value": "mom5", "filepath": ".github/build-ci/manifests/mom5/gcc.spack.yaml.j2"},
+        #   {"template_value": "cice5", "filepath": ".github/build-ci/manifests/cice5/spack.yaml.j2"},
+        #   ...
+        # ]
         run: |
-          manifests=$(find .github/build-ci/manifests -type f -printf '"%p",')
-          echo "$manifests"
-          echo "matrix=[${manifests%,}]" >> $GITHUB_OUTPUT
+          pkgs="${{ steps.access-spack-packages.outputs.pkgs }}"
 
-      - name: Setup Spack Version Branch Matrix
-        id: setup-config
-        # Create a matrix of configuration directories (eg. v1.1)
-        run: |
-          json_entries=""
+          for pkg in $pkgs; do
+            # We want each manifest to have an associated injection of {{ package }} to $pkg
+            # Replace underscores with hyphens for the template value, as spack converts directory underscores to package name hyphens
+            template_value="${pkg//_/-}"
 
-          for config_dir in ${{ steps.set-matrix-pr.outputs.all_changed_files || steps.set-matrix-dispatch.outputs.dirs }}; do
-            # For directories of the form 'v1.1/blah', this will give `v1.1`
-            spack_branch_version=$(cut -d'/' -f1 <<< "$config_dir")
+            if [ -d ".github/build-ci/manifests/$pkg" ]; then  # Look for specific manifests for the package
+              # We space-separate the paths as we later use them in a for loop
+              manifest_paths=$(find .github/build-ci/manifests/$pkg -iname '*.j2' -type f -printf '%p ')
+            fi
 
-            json_entry=$(printf '{"spack-version-branch": "%s"}' "$spack_branch_version")
-            json_entries+="${json_entry},"
+            if [[ -z "$manifest_paths" ]]; then  # Use the default templates if no specific manifests exist for the package
+              # Similarly, space-separate the paths for a later for loop. Default manifests are always directly under .github/build-ci/manifests
+              manifest_paths=$(find .github/build-ci/manifests/ -maxdepth 1 -type f -iname '*.j2' -printf '%p ')
+            fi
+
+            for manifest_path in $manifest_paths; do
+              json_entry=$(printf '{"template_value": "%s", "filepath": "%s"}' "$template_value" "$manifest_path")
+              json_entries+="${json_entry},"
+            done
+            unset manifest_paths
           done
 
           echo "$json_entries"
+
+          # Remove the trailing comma and wrap in square brackets
           echo "matrix=[${json_entries%,}]" >> $GITHUB_OUTPUT
+
+      # End of adapted package generation logic...
 
       - name: Checkout build-ci
         uses: actions/checkout@v6
@@ -127,16 +160,20 @@ jobs:
         manifest: ${{ fromJson(needs.setup-ci.outputs.manifest-matrix) }}
         config: ${{ fromJson(needs.setup-ci.outputs.config-matrix) }}
         # Respectively of the form:
-        #   [ .github/build-ci/manifests/some.spack.yaml, ...]
+        #   [
+        #     {"template_value": "mom5", "filepath": ".github/build-ci/manifests/mom5/intel.spack.yaml.j2"},
+        #     {"template_value": "mom5", "filepath": ".github/build-ci/manifests/mom5/gcc.spack.yaml.j2"},
+        #     ...
+        #   ]
         # And:
-        #   [{
-        #     spack-version-branch: v1.1
-        #   }, ...]
+        #   [v1.1, v1.3, ...]
     uses: access-nri/build-ci/.github/workflows/ci.yml@v3
     with:
       spack-manifest-repository: ${{ needs.setup-ci.outputs.spack-manifest-repository }}
-      spack-manifest-path: ${{ matrix.manifest }}
+      spack-manifest-path: ${{ matrix.manifest.filepath }}
       spack-manifest-data-path: .github/build-ci/data/standard_definitions.json
+      spack-manifest-data-pairs: |
+        package ${{ matrix.manifest.template_value }}
       spack-config-ref: ${{ needs.setup-ci.outputs.spack-config-ref }}
       spack-ref: ${{ needs.setup-ci.outputs.spack-ref }}
       container-image-version: :rocky-${{ matrix.config.spack-version-branch }}
