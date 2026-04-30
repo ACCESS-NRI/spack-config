@@ -172,11 +172,11 @@ jobs:
       spack-manifest-repository: ${{ needs.setup-ci.outputs.spack-manifest-repository }}
       spack-manifest-path: ${{ matrix.manifest.filepath }}
       spack-manifest-data-path: .github/build-ci/data/standard_definitions.json
-      spack-manifest-data-pairs: |
+      spack-manifest-data-pairs: |-
         package ${{ matrix.manifest.template_value }}
       spack-config-ref: ${{ needs.setup-ci.outputs.spack-config-ref }}
       spack-ref: ${{ needs.setup-ci.outputs.spack-ref }}
-      container-image-version: :rocky-${{ matrix.config.spack-version-branch }}
+      container-image-version: :rocky-${{ matrix.config }}
       # Workflow dispatch can switch depending on cluster/GitHub resourcing, otherwise run self-hosted
       run-self-hosted: ${{ inputs.run-self-hosted || true }}
     secrets:
