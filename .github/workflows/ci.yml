@@ -40,7 +40,7 @@ jobs:
       spack-manifest-repository: ${{ env.SPACK_MANIFEST_REPOSITORY }}
       # Matrices used in CI job
       manifest-matrix: ${{ steps.set-manifest-matrix.outputs.matrix }}
-      config-matrix: ${{ steps.set-config-matrix-pr.outputs.matrix || steps.set-config-matrix-dispatch.outputs.dirs }}
+      config-matrix: ${{ steps.set-config-matrix-pr.outputs.all_changed_files || steps.set-config-matrix-dispatch.outputs.dirs }}
       # Global defaults for CI job
       spack-config-ref: ${{ inputs.spack-config-ref || github.event.pull_request.head.sha }}
       spack-ref: ${{ inputs.spack-ref || steps.defaults.outputs.spack-ref }}
