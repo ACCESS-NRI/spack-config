@@ -1,0 +1,39 @@
+include:
+  # user configuration scope replaced by ACCESS-NRI user scopes
+  # (highest to lowest precedence):
+  # access.nri.gadi.user
+  # access.nri.ci.user
+  # NOTE: These two scopes are mutually exclusive.
+  # These scopes and rules must be separate and above the predefined scopes
+  # in order for Spack to override ACCESS-NRI's predefined scopes and rules.
+
+  # downstream user configuration scope
+  - name: "access.nri.gadi.user"
+    path: "/g/data/$PROJECT/$USER/spack/1.1/spack-user-config"
+    optional: true
+    when: '"gadi.nci.org.au" in hostname'
+
+  # downstream user configuration scope
+  - name: "access.nri.ci.user"
+    path: "$spack/../runner/spack-user-config"
+    optional: true
+    when: '"gadi.nci.org.au" not in hostname'
+
+  # Gadi downstream configuration scope
+  - name: "access.nri.gadi.downstream"
+    path: "$spack/../spack-config/v1.1/gadi/downstream"
+    when: '"gadi.nci.org.au" in hostname'
+
+  # CI downstream configuration scope
+  - name: "access.nri.ci.downstream"
+    path: "$spack/../spack-config/v1.1/ci/downstream"
+    when: '"gadi.nci.org.au" not in hostname'
+
+  # Gadi configuration scope
+  - name: "access.nri.gadi"
+    path: "$spack/../spack-config/v1.1/gadi"
+    when: '"gadi.nci.org.au" in hostname'
+
+  # system configuration scope replaced by access.nri.defaults scope
+  - name: "access.nri.defaults"
+    path: "$spack/../spack-config/v1.1"

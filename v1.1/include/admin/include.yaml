@@ -1,0 +1,20 @@
+include:
+  # user configuration scope replaced by ACCESS-NRI user scopes
+  # (highest to lowest precedence):
+  # access.nri.admin
+  # These scopes and rules must be separate and above the predefined scopes
+  # in order for Spack to override ACCESS-NRI's predefined scopes and rules.
+
+  # access.nri.admin configuration scope
+  - name: "access.nri.admin"
+    path: "$spack/../spack-admin-config"
+    optional: true
+
+  # Gadi configuration scope
+  - name: "access.nri.gadi"
+    path: "$spack/../spack-config/v1.1/gadi"
+    when: '"gadi.nci.org.au" in hostname'
+
+  # system configuration scope replaced by access.nri.defaults scope
+  - name: "access.nri.defaults"
+    path: "$spack/../spack-config/v1.1"
