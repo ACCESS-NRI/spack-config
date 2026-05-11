@@ -6,6 +6,5 @@ repos:
     destination: $spack/../access-spack-packages
   builtin::
     git: https://github.com/ACCESS-NRI/upstream-spack-packages.git
-    # gcc: use link type dep for binutils (#3671)
-    commit: 2f02a99ec9dfd5dceb9bd91abc392edabd9ba963
+    branch: access/v1.1
     destination: $spack/../spack-packages
