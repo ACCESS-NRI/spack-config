@@ -6,5 +6,5 @@ repos:
     destination: $spack/../access-spack-packages
   builtin::
     git: https://github.com/ACCESS-NRI/upstream-spack-packages.git
-    branch: access/v1.1-test
+    branch: access/v1.1-test2
     destination: $spack/../spack-packages
