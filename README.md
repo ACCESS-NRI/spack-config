@@ -17,7 +17,7 @@ This repository contains:
 
 ### Gadi Advanced user (Optional)
 
-* Add an editable Spack repository (Run `spack repo list` to see enabled repositories in order of highest precedence to lowest precedence):
+* If there is a need to modify a Spack Package Recipe (SPR), simply add an _editable_ Spack repository by using `spack repo add`. Run `spack repo list` to see all the enabled repositories in order of highest precedence to lowest precedence. For example, add an editable `access-spack-packages` repository by running:
 ```
 cd /g/data/$PROJECT/$USER/spack/1.1
 git clone https://github.com/ACCESS-NRI/access-spack-packages
