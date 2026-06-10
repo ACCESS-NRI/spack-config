@@ -110,9 +110,9 @@ packages:
     buildable: false
   python:
     externals:
-    - spec: python@3.11.7
-      prefix: /apps/python3/3.11.7
-      modules: [python3/3.11.7]
+    - spec: python@3.12.1
+      prefix: /apps/python3/3.12.1
+      modules: [python3/3.12.1]
       # $ module show python3-as-python
       # -------------------------------------------------------------------
       # /apps/Modules/modulefiles/python3-as-python:
@@ -120,6 +120,13 @@ packages:
       # conflict        python2-as-python
       # setenv          NCI_PYTHONX_AS_PYTHON python3
       # -------------------------------------------------------------------
+      extra_attributes:
+        environment:
+          set:
+            NCI_PYTHONX_AS_PYTHON: python3
+    - spec: python@3.11.7
+      prefix: /apps/python3/3.11.7
+      modules: [python3/3.11.7]
       extra_attributes:
         environment:
           set:
