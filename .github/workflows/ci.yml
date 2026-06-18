@@ -34,10 +34,9 @@ jobs:
     env:
       # Note, this needs to be updated in line with refs in the CI job below
       BUILD_CI_WORKFLOW_VERSION: v3
-      # Which repository we get the manifest-to-test from
-      SPACK_MANIFEST_REPOSITORY: ACCESS-NRI/access-spack-packages
+      # Which directory under access-nri/access-spack-packages contains the spack packages
+      ACCESS_SPACK_PACKAGES_ROOT_DIR: spack_repo/access/nri/packages
     outputs:
-      spack-manifest-repository: ${{ env.SPACK_MANIFEST_REPOSITORY }}
       # Matrices used in CI job
       manifest-matrix: ${{ steps.set-manifest-matrix.outputs.matrix }}
       config-matrix: ${{ steps.set-config-matrix-pr.outputs.all_changed_files || steps.set-config-matrix-dispatch.outputs.dirs }}
@@ -68,19 +67,13 @@ jobs:
         run: |
           echo "dirs=${{ inputs.spack-config-directories-to-test }}" >> $GITHUB_OUTPUT
 
-      - name: Get ${{ env.SPACK_MANIFEST_REPOSITORY }}
+      - name: Checkout access-spack-packages
         uses: actions/checkout@v6
         with:
-          repository: ${{ env.SPACK_MANIFEST_REPOSITORY }}
+          repository: access-nri/access-spack-packages
 
-      # This access-spack-packages matrix creation logic was adapted from
-      # https://github.com/ACCESS-NRI/access-spack-packages/blob/51064dc720f49c49e9680c368201e26081d4fa3f/.github/workflows/ci.yml#L58-L145
-      # Since these manifests use the jinja template variable 'package', we need it here too.
-      # Future manifest repositories may not need to associate the spec with a jinja variable, in which case this can be removed.
-      - name: Get Manifests from ${{ env.SPACK_MANIFEST_REPOSITORY }}
+      - name: Get packages from access-spack-packages
         id: access-spack-packages
-        env:
-          ACCESS_SPACK_PACKAGES_ROOT_DIR: spack_repo/access/nri/packages
         run: |
           pkgs=$(find ${{ env.ACCESS_SPACK_PACKAGES_ROOT_DIR }}/ -mindepth 1 -maxdepth 1 -type d -printf '%P ')
 
@@ -88,48 +81,14 @@ jobs:
 
           echo "pkgs=$pkgs" >> $GITHUB_OUTPUT
 
-      - name: Setup Manifest Matrix
+      - name: Setup Matrix
         id: set-manifest-matrix
-        # Get all packages that will be tested, then
-        # Get file paths to manifests for each package, and a template, then finally
-        # Convert into a JSON array for the matrix, one of the form:
-        # [
-        #   {"template_value": "mom5", "filepath": ".github/build-ci/manifests/mom5/intel.spack.yaml.j2"},
-        #   {"template_value": "mom5", "filepath": ".github/build-ci/manifests/mom5/gcc.spack.yaml.j2"},
-        #   {"template_value": "cice5", "filepath": ".github/build-ci/manifests/cice5/spack.yaml.j2"},
-        #   ...
-        # ]
-        run: |
-          pkgs="${{ steps.access-spack-packages.outputs.pkgs }}"
-
-          for pkg in $pkgs; do
-            # We want each manifest to have an associated injection of {{ package }} to $pkg
-            # Replace underscores with hyphens for the template value, as spack converts directory underscores to package name hyphens
-            template_value="${pkg//_/-}"
-
-            if [ -d ".github/build-ci/manifests/$pkg" ]; then  # Look for specific manifests for the package
-              # We space-separate the paths as we later use them in a for loop
-              manifest_paths=$(find .github/build-ci/manifests/$pkg -iname '*.j2' -type f -printf '%p ')
-            fi
-
-            if [[ -z "$manifest_paths" ]]; then  # Use the default templates if no specific manifests exist for the package
-              # Similarly, space-separate the paths for a later for loop. Default manifests are always directly under .github/build-ci/manifests
-              manifest_paths=$(find .github/build-ci/manifests/ -maxdepth 1 -type f -iname '*.j2' -printf '%p ')
-            fi
-
-            for manifest_path in $manifest_paths; do
-              json_entry=$(printf '{"template_value": "%s", "filepath": "%s"}' "$template_value" "$manifest_path")
-              json_entries+="${json_entry},"
-            done
-            unset manifest_paths
-          done
-
-          echo "$json_entries"
-
-          # Remove the trailing comma and wrap in square brackets
-          echo "matrix=[${json_entries%,}]" >> $GITHUB_OUTPUT
-
-      # End of adapted package generation logic...
+        # Find all manifests defined in all packages MCRs (if applicable) or access-spack-packages if not found there
+        # Creates a matrix of the form: [{PACKAGE, MANIFEST_REPO, MANIFEST_REPO_REF, MANIFEST_PATH_IN_REPO}, ...]
+        uses: access-nri/access-spack-packages/.github/build-ci/actions/generate-manifest-matrix@419-use-mcr-manifests
+        with:
+          packages: ${{ steps.access-spack-packages.outputs.pkgs }}
+          packages-root-dir: ${{ env.ACCESS_SPACK_PACKAGES_ROOT_DIR }}
 
       - name: Checkout build-ci
         uses: actions/checkout@v6
@@ -155,23 +114,25 @@ jobs:
       - setup-ci
     strategy:
       fail-fast: false
-      max-parallel: 5
+      max-parallel: 7
       matrix:
         manifest: ${{ fromJson(needs.setup-ci.outputs.manifest-matrix) }}
         config: ${{ fromJson(needs.setup-ci.outputs.config-matrix) }}
         # Respectively of the form:
         #   [
-        #     {"template_value": "mom5", "filepath": ".github/build-ci/manifests/mom5/intel.spack.yaml.j2"},
-        #     {"template_value": "mom5", "filepath": ".github/build-ci/manifests/mom5/gcc.spack.yaml.j2"},
+        #     {"template_value": "mom5", "repository": "ACCESS-NRI/MOM5", "ref": "master", "filepath": ".github/build-ci/manifests/intel.spack.yaml.j2"},
+        #     {"template_value": "mom5", "repository": "ACCESS-NRI/MOM5", "ref": "master", "filepath": ".github/build-ci/manifests/gcc.spack.yaml.j2"},
+        #     {"template_value": "datetime-fortran", "repository": "ACCESS-NRI/access-spack-packages", "ref": "api-v2", "filepath": ".github/build-ci/manifests/datetime-fortran/spack.yaml.j2"},
         #     ...
         #   ]
         # And:
         #   [v1.1, v1.3, ...]
     uses: access-nri/build-ci/.github/workflows/ci.yml@v3
     with:
-      spack-manifest-repository: ${{ needs.setup-ci.outputs.spack-manifest-repository }}
+      spack-manifest-repository: ${{ matrix.manifest.repository }}
+      spack-manifest-repository-ref: ${{ matrix.manifest.ref }}
       spack-manifest-path: ${{ matrix.manifest.filepath }}
-      spack-manifest-data-path: .github/build-ci/data/standard_definitions.json
+      spack-manifest-data-path: .github/build-ci/data/standard.json
       spack-manifest-data-pairs: |-
         package ${{ matrix.manifest.template_value }}
       spack-config-ref: ${{ needs.setup-ci.outputs.spack-config-ref }}
