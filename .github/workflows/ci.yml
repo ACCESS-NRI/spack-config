@@ -104,6 +104,7 @@ jobs:
         with:
           repository: access-nri/build-ci
           ref: ${{ env.BUILD_CI_WORKFLOW_VERSION }}
+          token: ${{ secrets.SPACK_INSTALL_COMMAND_PAT }}
 
       - name: Get default refs from build-ci workflow
         id: defaults
