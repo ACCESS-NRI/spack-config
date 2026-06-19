@@ -89,12 +89,14 @@ jobs:
         with:
           packages: ${{ steps.access-spack-packages.outputs.pkgs }}
           packages-root-dir: ${{ env.ACCESS_SPACK_PACKAGES_ROOT_DIR }}
+          token: ${{ secrets.SPACK_INSTALL_COMMAND_PAT }}
 
       - name: Checkout build-ci
         uses: actions/checkout@v6
         with:
           repository: access-nri/build-ci
           ref: ${{ env.BUILD_CI_WORKFLOW_VERSION }}
+
 
       - name: Get default refs from build-ci workflow
         id: defaults
