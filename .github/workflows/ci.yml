@@ -150,6 +150,7 @@ jobs:
       spack-manifest-data-path: .github/build-ci/data/standard.json
       spack-manifest-data-pairs: |-
         package ${{ matrix.manifest.template_value }}
+      ref: ${{ matrix.manifest.ref }}
       spack-config-ref: ${{ needs.setup-ci.outputs.spack-config-ref }}
       spack-ref: ${{ needs.setup-ci.outputs.spack-ref }}
       container-image-version: :rocky-${{ matrix.config }}
