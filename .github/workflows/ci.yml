@@ -98,6 +98,8 @@ jobs:
           packages: ${{ steps.access-spack-packages.outputs.pkgs }}
           packages-root-dir: ${{ env.ACCESS_SPACK_PACKAGES_ROOT_DIR }}
           token: ${{ secrets.SPACK_INSTALL_COMMAND_PAT }}
+          # FIXME: Remove once ACCESS-NRI/access-spack-packages#420 is merged, this is a test
+          ref: 419-use-mcr-manifests
 
       - name: Checkout build-ci
         uses: actions/checkout@v6
@@ -124,7 +126,7 @@ jobs:
       - setup-ci
     strategy:
       fail-fast: false
-      max-parallel: 7
+      max-parallel: 8
       matrix:
         # Respectively of the form:
         #   [
