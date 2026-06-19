@@ -27,6 +27,12 @@ on:
         required: true
         default: true
         type: boolean
+# We don't want to overwhelm the runners with multiple commits in a PR.
+# So we will cancel any existing runs and only run the current HEAD of the branch
+concurrency:
+  group: build-ci-${{ github.head_ref || github.ref_name }}
+  # only cancel in progress jobs on this branch if we are in a pull request - we might be doing multiple different workflow_dispatch runs
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   setup-ci:
     name: Setup CI
@@ -96,7 +102,6 @@ jobs:
         with:
           repository: access-nri/build-ci
           ref: ${{ env.BUILD_CI_WORKFLOW_VERSION }}
-
 
       - name: Get default refs from build-ci workflow
         id: defaults
