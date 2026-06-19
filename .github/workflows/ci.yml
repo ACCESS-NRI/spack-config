@@ -131,17 +131,17 @@ jobs:
         config: ${{ fromJson(needs.setup-ci.outputs.config-matrix) }}
         # Exclude bundles and packages that can't build with build-ci
         exclude:
-          - package: {template_value: "access-om2"}
-          - package: {template_value: "access-om2-bgc"}
-          - package: {template_value: "access-om3"}
-          - package: {template_value: "access-esm1p5"}
-          - package: {template_value: "access-esm1p6"}
-          - package: {template_value: "access-am3"}
-          - package: {template_value: "access-ram3"}
-          - package: {template_value: "access-issm"}
-          - package: {template_value: "access-test"}
-          - package: {template_value: "coastri-roms"}
-          - package: {template_value: "gcom4"}
+          - manifest: {template_value: "access-om2"}
+          - manifest: {template_value: "access-om2-bgc"}
+          - manifest: {template_value: "access-om3"}
+          - manifest: {template_value: "access-esm1p5"}
+          - manifest: {template_value: "access-esm1p6"}
+          - manifest: {template_value: "access-am3"}
+          - manifest: {template_value: "access-ram3"}
+          - manifest: {template_value: "access-issm"}
+          - manifest: {template_value: "access-test"}
+          - manifest: {template_value: "coastri-roms"}
+          - manifest: {template_value: "gcom4"}
     uses: access-nri/build-ci/.github/workflows/ci.yml@v3
     with:
       spack-manifest-repository: ${{ matrix.manifest.repository }}
