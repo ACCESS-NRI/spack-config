@@ -93,7 +93,7 @@ jobs:
         id: set-manifest-matrix
         # Find all manifests defined in all packages MCRs (if applicable) or access-spack-packages if not found there
         # Creates a matrix of the form: [{PACKAGE, MANIFEST_REPO, MANIFEST_REPO_REF, MANIFEST_PATH_IN_REPO}, ...]
-        uses: access-nri/access-spack-packages/.github/build-ci/actions/generate-manifest-matrix@api-v2
+        uses: access-nri/access-spack-packages/.github/build-ci/actions/generate-manifest-matrix@419-use-mcr-manifests
         with:
           packages: ${{ steps.access-spack-packages.outputs.pkgs }}
           packages-root-dir: ${{ env.ACCESS_SPACK_PACKAGES_ROOT_DIR }}
