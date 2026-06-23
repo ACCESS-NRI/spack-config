@@ -36,6 +36,8 @@ jobs:
   setup-ci:
     name: Setup CI
     runs-on: ubuntu-latest
+    # We run this in our runner container so we can effectively parse the git repository for each package via spack
+    container: ghcr.io/access-nri/build-ci-runner:rocky
     env:
       # Note, this needs to be updated in line with refs in the CI job below
       BUILD_CI_WORKFLOW_VERSION: v3
