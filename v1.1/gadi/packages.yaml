@@ -1,4 +1,16 @@
 packages:
+  cmake:
+    externals:
+    - spec: cmake@4.3.3
+      prefix: /apps/cmake/4.3.3
+      modules: [cmake/4.3.3]
+    - spec: cmake@3.31.12
+      prefix: /apps/cmake/3.31.12
+      modules: [cmake/3.31.12]
+    - spec: cmake@3.24.2
+      prefix: /apps/cmake/3.24.2
+      modules: [cmake/3.24.2]
+    buildable: false
   openmpi:
     # https://spack.readthedocs.io/en/latest/configuration.html#environment-modifications
     externals:
