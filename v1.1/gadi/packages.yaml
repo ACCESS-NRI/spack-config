@@ -100,6 +100,13 @@ packages:
         environment:
           prepend_path:
             CMAKE_PREFIX_PATH: /apps/openmpi/5.0.8/include/Intel
+    - spec: openmpi@5.0.8+cuda %nvhpc@25.9
+      prefix: /apps/openmpi/5.0.8
+      modules: [openmpi/5.0.8]
+      extra_attributes:
+        environment:
+          prepend_path:
+            CMAKE_PREFIX_PATH: /apps/openmpi/5.0.8/include/nvidia
     buildable: false
   python:
     externals:
@@ -217,6 +224,16 @@ packages:
           c: /apps/intel-ct/wrapper/icc
           cxx: /apps/intel-ct/wrapper/icpc
           fortran: /apps/intel-ct/wrapper/ifort
+  nvhpc:
+    externals:
+    - spec: nvhpc@25.9~blas~lapack~mpi
+      prefix: /apps/nvidia-hpc-sdk/25.9/compilers
+      modules: [nvidia-hpc-sdk/25.9, cuda/12.9.0] # cuda needed to compile GPU code
+      extra_attributes:
+        compilers:
+          c: /apps/nvidia-hpc-sdk/25.9/compilers/bin/nvc
+          cxx: /apps/nvidia-hpc-sdk/25.9/compilers/bin/nvc++
+          fortran: /apps/nvidia-hpc-sdk/25.9/compilers/bin/nvfortran
   llvm:
     externals:
     - spec: llvm@19.1.7+clang~flang~lld~lldb
