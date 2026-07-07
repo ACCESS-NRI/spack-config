@@ -47,6 +47,7 @@ jobs:
       # Matrices used in CI job
       manifest-matrix: ${{ steps.set-manifest-matrix.outputs.matrix }}
       config-matrix: ${{ steps.set-config-matrix-pr.outputs.all_changed_files || steps.set-config-matrix-dispatch.outputs.dirs }}
+      exclude-matrix: ${{ steps.set-manifest-matrix.outputs.exclude-matrix }}
       # Global defaults for CI job
       spack-config-ref: ${{ inputs.spack-config-ref || github.event.pull_request.head.sha }}
       spack-ref: ${{ inputs.spack-ref || steps.defaults.outputs.spack-ref }}
@@ -133,30 +134,19 @@ jobs:
         #   ]
         # And:
         #   [v1.1, v1.3, ...]
-        manifest: ${{ fromJson(needs.setup-ci.outputs.manifest-matrix) }}
+        package: ${{ fromJson(needs.setup-ci.outputs.manifest-matrix) }}
         config: ${{ fromJson(needs.setup-ci.outputs.config-matrix) }}
         # Exclude bundles and packages that can't build with build-ci
-        exclude:
-          - manifest: {template_value: "access-om2"}
-          - manifest: {template_value: "access-om2-bgc"}
-          - manifest: {template_value: "access-om3"}
-          - manifest: {template_value: "access-esm1p5"}
-          - manifest: {template_value: "access-esm1p6"}
-          - manifest: {template_value: "access-am3"}
-          - manifest: {template_value: "access-ram3"}
-          - manifest: {template_value: "access-issm"}
-          - manifest: {template_value: "access-test"}
-          - manifest: {template_value: "coastri-roms"}
-          - manifest: {template_value: "gcom4"}
+        exclude: ${{ fromJson(needs.setup-ci.outputs.exclude-matrix) }}
     uses: access-nri/build-ci/.github/workflows/ci.yml@v3
     with:
-      spack-manifest-repository: ${{ matrix.manifest.repository }}
-      spack-manifest-repository-ref: ${{ matrix.manifest.ref }}
-      spack-manifest-path: ${{ matrix.manifest.filepath }}
+      spack-manifest-repository: ${{ matrix.package.repository }}
+      spack-manifest-repository-ref: ${{ matrix.package.ref }}
+      spack-manifest-path: ${{ matrix.package.filepath }}
       spack-manifest-data-path: .github/build-ci/data/standard.json
       spack-manifest-data-pairs: |-
-        package ${{ matrix.manifest.template_value }}
-      ref: ${{ matrix.manifest.ref }}
+        package ${{ matrix.package.template_value }}
+      ref: ${{ matrix.package.ref }}
       spack-config-ref: ${{ needs.setup-ci.outputs.spack-config-ref }}
       spack-ref: ${{ needs.setup-ci.outputs.spack-ref }}
       container-image-version: :rocky-${{ matrix.config }}
