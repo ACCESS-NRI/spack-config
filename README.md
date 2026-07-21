@@ -17,14 +17,51 @@ This repository contains:
 
 ### Gadi Advanced user (Optional)
 
-* If there is a need to modify a Spack Package Recipe (SPR), simply add an _editable_ Spack repository by using `spack repo add`. Run `spack repo list` to see all the enabled repositories in order of highest precedence to lowest precedence. For example, add an editable `access-spack-packages` repository by running:
+The shared Spack instance contains a read-only `access-spack-packages` repository. If there is a need to modify a Spack Package Recipe (SPR) or choose an older version of the repository, simply add an _editable_ Spack repository by using `spack repo add`. Run `spack repo list` to see all the enabled repositories in order of highest precedence to lowest precedence.
+
+#### Create an editable access-spack-packages _in_ a Spack environment
+
+This option will isolate the new editable `access-spack-packages` repository by only adding it to a single Spack environment, after cloning the repository inside the same directory as the `spack.yaml` file. Other Spack environments will be completely unaffected. The following commands must be run _after_ activating a Spack environment:
+```
+spack cd -e
+git clone https://github.com/ACCESS-NRI/access-spack-packages
+spack repo add access-spack-packages/spack_repo/access/nri
+```
+
+#### Create an editable access-spack-packages _outside_ a Spack environment
+
+By running the following commands, Spack will choose to use the editable `access-spack-packages` repository with all Spack environments and when an environment is not activated:
 ```
 cd /g/data/$PROJECT/$USER/spack/1.1
 git clone https://github.com/ACCESS-NRI/access-spack-packages
 spack repo add --scope=access.nri.gadi.user access-spack-packages/spack_repo/access/nri
 ```
 
-* Disable upstreams: run `spack config --scope=access.nri.gadi.user edit upstreams` and insert `upstreams:: {}`.
+#### Choose an older version of access-spack-packages repository
+
+Immediately after creating an _editable_ `access-spack-packages` repository, and before changing the current directory, run:
+```
+git -C access-spack-packages switch -c <spack_packages_version> <spack_packages_version>
+```
+
+#### Update Spack repositories
+
+Run `spack repo list` to identify the name of the repository.
+
+```
+cd $(spack location --repo <name-of-repository>)
+git fetch origin
+git reset --hard origin/<current-branch-name>
+```
+
+#### Ignore pre-built upstream Spack packages
+
+Spack will use a pre-built upstream package rather than rebuild it. If there is a need to force the rebuilding of the source package, upstreams can be disabled by running:
+
+1. `mkdir -p /g/data/tm70/hj1810/spack/1.1/spack-user-config`
+2. `spack config --scope=access.nri.gadi.user edit upstreams` and insert `upstreams:: {}`
+
+To re-enable upstreams, run: `spack config --scope=access.nri.gadi.user edit upstreams` and delete `upstreams:: {}`.
 
 ### Gadi Admin user
 
