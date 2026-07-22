@@ -231,9 +231,9 @@ packages:
       modules: [nvidia-hpc-sdk/25.9, cuda/12.9.0] # cuda needed to compile GPU code
       extra_attributes:
         compilers:
-          c: /apps/nvidia-hpc-sdk/25.9/compilers/bin/nvc
-          cxx: /apps/nvidia-hpc-sdk/25.9/compilers/bin/nvc++
-          fortran: /apps/nvidia-hpc-sdk/25.9/compilers/bin/nvfortran
+          c: /apps/nvidia-hpc-sdk/wrappers/nvc
+          cxx: /apps/nvidia-hpc-sdk/wrappers/nvc++
+          fortran: /apps/nvidia-hpc-sdk/wrappers/nvfortran
   llvm:
     externals:
     - spec: llvm@19.1.7+clang~flang~lld~lldb
