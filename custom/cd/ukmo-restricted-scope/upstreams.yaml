@@ -1,5 +1,6 @@
 # This scope is used to manage UK Met Office restricted packages.
-# This file allows access to previously installed unrestricted packages.
-upstreams:
+# This file allows access to previously installed unrestricted packages,
+# and overrides all lower scopes (so no packages from release are included).
+upstreams::
   unrestricted:
     install_tree: $spack/../release
