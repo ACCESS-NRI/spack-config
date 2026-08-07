@@ -3,4 +3,4 @@
 # and overrides all lower scopes (so no packages from release are included).
 upstreams::
   unrestricted:
-    install_tree: $spack/../release
+    install_tree: /g/data/vk83/apps/spack/1.1/release
