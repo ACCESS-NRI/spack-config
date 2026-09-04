@@ -7,7 +7,5 @@ packages:
     - spec: perl@5.26.3
       prefix: /usr
     buildable: false
-  libtool:
-    version: [:2.4.6]
   all:
     target: [x86_64_v3]
