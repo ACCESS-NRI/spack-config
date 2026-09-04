@@ -21,9 +21,18 @@ The shared Spack instance contains a read-only `access-spack-packages` repositor
 
 #### Create an editable access-spack-packages _in_ a Spack environment
 
-This option will isolate the new editable `access-spack-packages` repository by only adding it to a single Spack environment, after cloning the repository inside the same directory as the `spack.yaml` file. Other Spack environments will be completely unaffected. The following commands must be run _after_ activating a Spack environment:
+This option will isolate the new editable `access-spack-packages` repository by only adding it to a single Spack environment, after cloning the repository inside the same directory as the `spack.yaml` file. Other Spack environments will be completely unaffected.
+
+After activating the Spack environment (`spack env activate -p -d <path-to-spack-environment-directory>`), change the working directory to the Spack environment directory:
 ```
 spack cd -e
+```
+
+> [!WARNING]
+> The Spack environment may be preconfigured with an editable `access-spack-packages` repository. This can be verified by running `ls -d package-repos/access-spack-packages` and confirming whether the directory already exists.
+
+After verifying that there is no editable `access-spack-packages` repository, run:
+```
 git clone https://github.com/ACCESS-NRI/access-spack-packages
 spack repo add access-spack-packages/spack_repo/access/nri
 ```
