@@ -20,3 +20,10 @@ toolchains:
     when: '%cxx'
   - spec: '%fortran=intel-oneapi-compilers'
     when: '%fortran'
+  access_nvhpc:
+  - spec: '%c=intel-oneapi-compilers'
+    when: '%c'
+  - spec: '%cxx=intel-oneapi-compilers'
+    when: '%cxx'
+  - spec: '%fortran=nvhpc'
+    when: '%fortran'
