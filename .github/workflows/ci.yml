@@ -40,7 +40,7 @@ jobs:
     container: ghcr.io/access-nri/build-ci-runner:rocky
     env:
       # Note, this needs to be updated in line with refs in the CI job below
-      BUILD_CI_WORKFLOW_VERSION: v3
+      BUILD_CI_WORKFLOW_VERSION: v4
       # Which directory under access-nri/access-spack-packages contains the spack packages
       ACCESS_SPACK_PACKAGES_ROOT_DIR: spack_repo/access/nri/packages
     outputs:
@@ -53,7 +53,7 @@ jobs:
       spack-ref: ${{ inputs.spack-ref || steps.defaults.outputs.spack-ref }}
     steps:
       - name: Checkout spack-config
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: PR - Get dirs changed
         id: set-config-matrix-pr
@@ -76,7 +76,7 @@ jobs:
           echo "dirs=${{ inputs.spack-config-directories-to-test }}" >> $GITHUB_OUTPUT
 
       - name: Checkout access-spack-packages
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: access-nri/access-spack-packages
 
@@ -100,7 +100,7 @@ jobs:
           token: ${{ secrets.SPACK_INSTALL_COMMAND_PAT }}
 
       - name: Checkout build-ci
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: access-nri/build-ci
           ref: ${{ env.BUILD_CI_WORKFLOW_VERSION }}
@@ -138,12 +138,11 @@ jobs:
         config: ${{ fromJson(needs.setup-ci.outputs.config-matrix) }}
         # Exclude bundles and packages that can't build with build-ci
         exclude: ${{ fromJson(needs.setup-ci.outputs.exclude-matrix) }}
-    uses: access-nri/build-ci/.github/workflows/ci.yml@v3
+    uses: access-nri/build-ci/.github/workflows/ci.yml@v4
     with:
       spack-manifest-repository: ${{ matrix.package.repository }}
       spack-manifest-repository-ref: ${{ matrix.package.ref }}
       spack-manifest-path: ${{ matrix.package.filepath }}
-      spack-manifest-data-path: .github/build-ci/data/standard.json
       spack-manifest-data-pairs: |-
         package ${{ matrix.package.template_value }}
       ref: ${{ matrix.package.ref }}
