@@ -1,0 +1,7 @@
+repos:
+  # The actual branch/destination values are still taken from lower scopes,
+  # but can be changed to custom values if needed.
+  access_spack_packages:
+    git: https://github.com/ACCESS-NRI/access-spack-packages.git
+  builtin:
+    git: https://github.com/ACCESS-NRI/upstream-spack-packages.git
