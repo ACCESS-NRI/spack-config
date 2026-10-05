@@ -34,6 +34,11 @@ include:
     path: "$spack/../spack-config/v1.1/gadi"
     when: '"gadi.nci.org.au" in hostname'
 
+  # CI configuration scope
+  - name: "access.nri.ci"
+    path: "$spack/../spack-config/v1.1/ci"
+    when: '"gadi.nci.org.au" not in hostname'
+
   # system configuration scope replaced by access.nri.defaults scope
   - name: "access.nri.defaults"
     path: "$spack/../spack-config/v1.1"
