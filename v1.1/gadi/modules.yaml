@@ -4,3 +4,15 @@ modules:
     tcl:
       # https://spack.readthedocs.io/en/latest/module_file_support.html#exclude-or-include-specific-module-files
       exclude: ["openmpi"]
+      ^openmpi@4.0.2:
+        load:
+        - openmpi/4.0.2
+      ^openmpi@4.1.5:
+        load:
+        - openmpi/4.1.5
+      ^openmpi@4.1.7:
+        load:
+        - openmpi/4.1.7
+      ^openmpi@5.0.8:
+        load:
+        - openmpi/5.0.8
