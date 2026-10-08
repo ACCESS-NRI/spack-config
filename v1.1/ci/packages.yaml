@@ -1,0 +1,7 @@
+packages:
+  python:
+    externals:
+      # Provided by python3.12 and python3.12-devel on Rocky Linux
+    - spec: python@3.12.13
+      prefix: /usr
+    buildable: true
