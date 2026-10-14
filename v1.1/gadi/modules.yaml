@@ -2,8 +2,6 @@
 modules:
   default:
     tcl:
-      # https://spack.readthedocs.io/en/latest/module_file_support.html#exclude-or-include-specific-module-files
-      exclude: ["openmpi"]
       # NOTE: This section needs to be kept in-sync with the corresponding
       # packages.yaml file.
       ^openmpi@4.0.2:
