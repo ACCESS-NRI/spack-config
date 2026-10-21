@@ -8,7 +8,7 @@ modules:
       lmod: $spack/../release/lmod
     tcl:
       hash_length: 0
-      # https://spack.readthedocs.io/en/latest/module_file_support.html
+      # https://spack.readthedocs.io/en/v1.1.1/module_file_support.html
       # A common complaint about autoloading is the large number of modules
       # that are visible to the user. Spack has a solution for this as
       # well: hide_implicits: true. This ensures that only those packages
@@ -22,12 +22,15 @@ modules:
       # CI:
       # $ module --version
       # Modules Release 4.5.2 (2020-07-30)
-      # Looks like we need to use exclude_implicits because Gadi and CI has
-      # an old version of modules.
       # https://github.com/spack/spack/issues/40940
-      exclude_implicits: true
       # hide_implicits: true
       all:
-        autoload: direct
+        # https://spack.readthedocs.io/en/v1.1.1/module_file_support.html
+        # The direct option is most correct: there are cases where pure
+        # link dependencies need to set variables for themselves, or need
+        # to have variables of their own dependencies set.
+        # In practice however, run is often sufficient, and may make
+        # module load snappier.
+        autoload: run
       projections:
         all: '{name}/{version}-{hash:7}'
