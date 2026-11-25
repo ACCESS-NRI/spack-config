@@ -4,15 +4,30 @@ modules:
     tcl:
       # NOTE: This section needs to be kept in-sync with the corresponding
       # packages.yaml file.
-      ^openmpi@4.0.2:
+      '%cmake@4.3.3':
+        load:
+        - cmake/4.3.3
+      '%cmake@3.31.12':
+        load:
+        - cmake/3.31.12
+      '%cmake@3.24.2':
+        load:
+        - cmake/3.24.2
+      '%openmpi@4.0.2':
         load:
         - openmpi/4.0.2
-      ^openmpi@4.1.5:
+      '%openmpi@4.1.5':
         load:
         - openmpi/4.1.5
-      ^openmpi@4.1.7:
+      '%openmpi@4.1.7':
         load:
         - openmpi/4.1.7
-      ^openmpi@5.0.8:
+      '%openmpi@5.0.8':
         load:
         - openmpi/5.0.8
+      '%python@3.12.13':
+        load:
+        - python3/3.12.13
+      '%python@3.11.7':
+        load:
+        - python3/3.11.7
